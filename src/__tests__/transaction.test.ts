@@ -4,6 +4,20 @@ import { IBaseTransaction, IKey } from "../interfaces";
 import { KeyHandler } from "../key";
 import { TransactionHandler } from "../transaction";
 
+test("Send an encrypted onboard transaction", () => {
+  const keyHandler = new KeyHandler();
+  const txHandler = new TransactionHandler();
+  const connection = new Connection("http", "testnet-uk.activeledger.io", 5260, true);
+
+  keyHandler.generateKey("test", KeyType.EllipticCurve).then((key: IKey) => {
+    txHandler.onboardKey(key).then((keyTx: any) => {
+      txHandler.sendTransaction(keyTx, connection).then((res: any) => {
+        expect(res.$streams.new).not.toBeUndefined();
+      });
+    });
+  });
+});
+
 test("Create a namespace transaction", () => {
   const keyHandler = new KeyHandler();
   const connection = new Connection("http", "testnet-uk.activeledger.io", 5260);
@@ -36,20 +50,6 @@ test("Create a namespace transaction", () => {
       });
 
       
-    });
-  });
-});
-
-test("Send an encrypted onboard transaction", () => {
-  const keyHandler = new KeyHandler();
-  const txHandler = new TransactionHandler();
-  const connection = new Connection("http", "testnet-uk.activeledger.io", 5260, true);
-
-  keyHandler.generateKey("test", KeyType.EllipticCurve).then((key: IKey) => {
-    txHandler.onboardKey(key).then((keyTx: any) => {
-      txHandler.sendTransaction(keyTx, connection).then((res: any) => {
-        expect(res.$streams.new).not.toBeUndefined();
-      });
     });
   });
 });
