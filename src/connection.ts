@@ -53,12 +53,18 @@ export class Connection {
    * @memberof Connection
    */
   public sendTransaction(txBody: IBaseTransaction): Promise<ILedgerResponse> {
-    return new Promise((reject) => {
+    return new Promise((resolve, reject) => {
       if (this.encryptTx) {
         this.httpOptions.headers = this.encryptedHeaders;
         this.encrypt(txBody)
           .then((encryptedTx: string) => {
-            return this.postTransaction(encryptedTx);
+            this.postTransaction(encryptedTx)
+            .then((resp: any) => {
+              resolve(resp as ILedgerResponse);
+            })
+            .catch((err: any) => {
+              reject(err);
+            })
           })
           .catch((err: any) => {
             reject(err);
@@ -86,6 +92,8 @@ export class Connection {
 
         res.setEncoding("utf8");
         res.on("data", (body: any) => {
+          // tslint:disable-next-line:no-console
+          console.log(body);
           resolve(JSON.parse(body));
         });
       });

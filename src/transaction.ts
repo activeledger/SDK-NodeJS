@@ -41,12 +41,32 @@ export class TransactionHandler {
         type: key.type,
       };
 
+      this.signTransaction(tx, key)
+      .then((txBody: IBaseTransaction) => {
+        resolve(txBody as IOnboardTx);
+      })
+      .catch((err: any) => {
+        reject(err);
+      })
+
+      
+    });
+  }
+
+  public signTransaction(txBody: IBaseTransaction, key: IKey): Promise<IBaseTransaction> {
+    return new Promise((resolve, reject) => {
       try {
         const keyPair = new ActiveCrypto.KeyPair(key.type, (key.key.prv as any).pkcs8pem);
 
-        tx.$sigs[key.name] = keyPair.sign(tx.$tx);
+        let identifier = key.name;
 
-        return resolve(tx);
+        if (key.identity) {
+          identifier = key.identity;
+        }
+
+        txBody.$sigs[identifier] = keyPair.sign(txBody.$tx);
+
+        return resolve(txBody);
       } catch (err) {
         return reject(err);
       }

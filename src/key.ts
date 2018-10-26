@@ -58,6 +58,7 @@ export class KeyHandler {
       tx.onboardKey(key).then((txBody: IOnboardTx) => {
         tx.sendTransaction(txBody, connection)
         .then((response: any) => {
+
           resolve(response);
         })
         .catch((err: any) => {

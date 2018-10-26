@@ -3,9 +3,10 @@ import { ActiveCrypto } from '@activeledger/activecrypto';
 // Key Interfaces
 
 export interface IKey {
-  name: string;
+  identity?: string;
   key: ActiveCrypto.KeyHandler;
   type: string;
+  name: string;
 }
 
 // Transaction Interfaces
