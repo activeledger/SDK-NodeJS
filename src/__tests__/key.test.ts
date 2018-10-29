@@ -27,9 +27,9 @@ test("Create RSA Key", async () => {
 
 test("Onboard Key", () => {
   const keyHandler = new KeyHandler();
-  const connection = new Connection("http", "testnet-uk.activeledger.io", 5260);
+  const connection = new Connection("http", "localhost", 5260);
 
-  keyHandler.generateKey("test", KeyType.EllipticCurve).then((key: IKey) => {
+  keyHandler.generateKey("test-onboard", KeyType.EllipticCurve).then((key: IKey) => {
     keyHandler.onboardKey(key, connection).then((res: any) => {
       expect(res.$streams.new).not.toBeUndefined();
     });

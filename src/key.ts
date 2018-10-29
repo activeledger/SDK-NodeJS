@@ -1,7 +1,7 @@
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import { Connection } from "./connection";
 import { KeyType } from "./enums";
-import { IKey, ILedgerResponse, IOnboardTx } from "./interfaces";
+import { IKey, IOnboardTx } from "./interfaces";
 import { TransactionHandler } from "./transaction";
 
 export class KeyHandler {
@@ -43,22 +43,22 @@ export class KeyHandler {
   }
 
   /**
-   * Onboard a key to the ledger
+   * Onboard a key to the ledger and assign an identity to the key
    *
    * @param {IKey} key - The key to onboard
    * @param {string} protocol - http or https
    * @param {string} address - The IP address or domain name e.g 0.0.0.0 or www.example.com
    * @param {number} port - The port to use
-   * @returns {Promise<ILedgerResponse>} Returns Ledger response as a promise
+   * @returns {Promise<any>} Returns Ledger response as a promise
    * @memberof KeyHandler
    */
-  public onboardKey(key: IKey, connection: Connection): Promise<ILedgerResponse> {
+  public onboardKey(key: IKey, connection: Connection): Promise<any> {
     return new Promise((resolve, reject) => {
       const tx = new TransactionHandler();
       tx.onboardKey(key).then((txBody: IOnboardTx) => {
         tx.sendTransaction(txBody, connection)
         .then((response: any) => {
-
+          key.identity = response.$streams.new[0].id;
           resolve(response);
         })
         .catch((err: any) => {

@@ -4,52 +4,44 @@ import { IBaseTransaction, IKey } from "../interfaces";
 import { KeyHandler } from "../key";
 import { TransactionHandler } from "../transaction";
 
-test("Send an encrypted onboard transaction", () => {
+jest.useFakeTimers();
+
+/* test("Send an encrypted onboard transaction", () => {
   const keyHandler = new KeyHandler();
-  const txHandler = new TransactionHandler();
-  const connection = new Connection("http", "testnet-uk.activeledger.io", 5260, true);
+  const connection = new Connection("http", "localhost", 5260, true);
 
-  keyHandler.generateKey("test", KeyType.EllipticCurve).then((key: IKey) => {
-    txHandler.onboardKey(key).then((keyTx: any) => {
-      txHandler.sendTransaction(keyTx, connection).then((res: any) => {
-        expect(res.$streams.new).not.toBeUndefined();
-      });
-    });
-  });
-});
-
-test("Create a namespace transaction", () => {
-  const keyHandler = new KeyHandler();
-  const connection = new Connection("http", "testnet-uk.activeledger.io", 5260);
-  let key: IKey;
-
-  keyHandler.generateKey("test", KeyType.EllipticCurve).then((generatedKey: IKey) => {
-    key = generatedKey;
+  keyHandler.generateKey("test-encrypt", KeyType.EllipticCurve).then((key: IKey) => {
     keyHandler.onboardKey(key, connection).then((res: any) => {
-
-      key.identity = res.$streams.new[0].id;
-
-      const txHandler = new TransactionHandler();
-      const tx: IBaseTransaction = {
-        $sigs: {},
-        $tx: {
-          $contract: "namespace",
-          $i: {},
-          $namespace: "default",
-        },
-      };
-
-      tx.$tx.$i[key.identity] = {
-        namespace: "test",
-      };
-
-      txHandler.signTransaction(tx, key).then((txBody: IBaseTransaction) => {
-        txHandler.sendTransaction(txBody, connection).then((resp: any) => {
-          expect(resp.$streams.new).not.toBeUndefined();
-        });
-      });
-
-      
+      expect(res.$streams.new).not.toBeUndefined();
     });
   });
-});
+}, 30000); */
+
+test("Create a namespace transaction", async () => {
+  const keyHandler = new KeyHandler();
+  const connection = new Connection("http", "localhost", 5260);
+  const key: IKey = await keyHandler.generateKey("test-namespace", KeyType.EllipticCurve);
+  key.identity = "";
+
+  const res = await keyHandler.onboardKey(key, connection);
+  
+  const txHandler = new TransactionHandler();
+  const tx: IBaseTransaction = {
+    $sigs: {},
+    $tx: {
+      $contract: "namespace",
+      $i: {},
+      $namespace: "default",
+    },
+  };
+
+  tx.$tx.$i[key.identity] = {
+    namespace: "test" + new Date().getTime(),
+  };
+
+  const txBody: IBaseTransaction = await txHandler.signTransaction(tx, key);
+  const resp: any = await txHandler.sendTransaction(txBody, connection)
+  
+  expect(resp.$streams.updated).not.toBeUndefined();
+
+}, 30000); 

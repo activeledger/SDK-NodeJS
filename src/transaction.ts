@@ -1,6 +1,6 @@
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import { Connection } from "./connection";
-import { IBaseTransaction, IKey, ILedgerResponse, IOnboardTx } from "./interfaces";
+import { IBaseTransaction, IKey, IOnboardTx } from "./interfaces";
 
 export class TransactionHandler {
   private contract = "onboard";
@@ -80,13 +80,13 @@ export class TransactionHandler {
    * @param {string} protocol - http or https
    * @param {string} address - The IP address or domain name e.g 0.0.0.0 or www.example.com
    * @param {number} port - The port to use
-   * @returns {Promise<ILedgerResponse>} Returns the ledger response
+   * @returns {Promise<any>} Returns the ledger response
    * @memberof Transaction
    */
   public sendTransaction(
     tx: IBaseTransaction | IOnboardTx,
     connection: Connection
-  ): Promise<ILedgerResponse> {
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
         
       connection.sendTransaction(tx)

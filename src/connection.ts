@@ -1,7 +1,7 @@
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import * as http from "http";
 import * as https from "https";
-import { IBaseTransaction, IHttpOptions, ILedgerResponse, INodeKeyData } from './interfaces';
+import { IBaseTransaction, IHttpOptions, INodeKeyData } from "./interfaces";
 
 export class Connection {
   private protocol: string;
@@ -49,29 +49,35 @@ export class Connection {
    *
    * @param {IBaseTransaction} txBody - The Body of the transaction
    * @param {boolean} [encrypt] - Whether or not the transaction should be encrypted
-   * @returns {Promise<ILedgerResponse>} Returns the response as a promise
+   * @returns {Promise<any>} Returns the response as a promise
    * @memberof Connection
    */
-  public sendTransaction(txBody: IBaseTransaction): Promise<ILedgerResponse> {
+  public sendTransaction(txBody: IBaseTransaction): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.encryptTx) {
         this.httpOptions.headers = this.encryptedHeaders;
         this.encrypt(txBody)
           .then((encryptedTx: string) => {
             this.postTransaction(encryptedTx)
-            .then((resp: any) => {
-              resolve(resp as ILedgerResponse);
-            })
-            .catch((err: any) => {
-              reject(err);
-            })
+              .then((resp: any) => {
+                resolve(resp);
+              })
+              .catch((err: any) => {
+                reject(err);
+              });
+          })
+          .catch((err: any) => {
+            reject(err);
+          });
+      } else {
+        this.postTransaction(txBody)
+          .then((resp: any) => {
+            resolve(resp);
           })
           .catch((err: any) => {
             reject(err);
           });
       }
-
-      return this.postTransaction(txBody);
     });
   }
 
@@ -80,26 +86,30 @@ export class Connection {
    *
    * @private
    * @param {(string | IBaseTransaction)} tx - The transaction to POST
-   * @returns {Promise<ILedgerResponse>} Returns the ledger response
+   * @returns {Promise<any>} Returns the ledger response
    * @memberof Connection
    */
-  private postTransaction(tx: string | IBaseTransaction): Promise<ILedgerResponse> {
+  private postTransaction(tx: string | IBaseTransaction): Promise<any> {
     return new Promise((resolve, reject) => {
       const req = this.protocolService.request(this.httpOptions, (res: any) => {
         if (res.statusCode !== 200) {
           reject(res);
         }
 
+        let body: string = "";
+
         res.setEncoding("utf8");
-        res.on("data", (body: any) => {
-          // tslint:disable-next-line:no-console
-          console.log(body);
-          resolve(JSON.parse(body));
+        res.on("data", (chunk: any) => {
+          body += chunk;
+        });
+
+        res.on("end", () => {
+          return resolve(JSON.parse(body));
         });
       });
 
       req.on("error", (err: any) => {
-        reject(err);
+        return reject(err);
       });
 
       if (typeof tx !== "string") {
@@ -123,9 +133,14 @@ export class Connection {
     return new Promise((resolve, reject) => {
       this.getNodeKeyData()
         .then((keyData: INodeKeyData) => {
-          const keyPair = new ActiveCrypto.KeyPair(keyData.encryption, keyData.pem);
+          try {
+            const keyPair = new ActiveCrypto.KeyPair("rsa", keyData.pem);
+          } catch (e) {
+            reject(e);
+          }
 
-          resolve(keyPair.encrypt(txBody));
+          // resolve(keyPair.encrypt(txBody));
+          resolve(JSON.stringify(txBody));
         })
         .catch((err: any) => {
           reject(err);
@@ -157,7 +172,7 @@ export class Connection {
 
             const nodeKey: INodeKeyData = {
               encryption: "rsa",
-              pem: atob(jsonData.pem),
+              pem: Buffer.from(jsonData.pem, "base64").toString(),
             };
 
             resolve(nodeKey);
@@ -169,5 +184,3 @@ export class Connection {
     });
   }
 }
-
-
