@@ -55,15 +55,15 @@ export class KeyHandler {
   public onboardKey(key: IKey, connection: Connection): Promise<any> {
     return new Promise((resolve, reject) => {
       const tx = new TransactionHandler();
-      tx.onboardKey(key).then((txBody: IOnboardTx) => {
+      tx.buildOnboardKeyTx(key).then((txBody: IOnboardTx) => {
         tx.sendTransaction(txBody, connection)
-        .then((response: any) => {
-          key.identity = response.$streams.new[0].id;
-          resolve(response);
-        })
-        .catch((err: any) => {
-          reject(err);
-        });
+          .then((response: any) => {
+            key.identity = response.$streams.new[0].id;
+            resolve(response);
+          })
+          .catch((err: any) => {
+            reject(err);
+          });
       });
     });
   }

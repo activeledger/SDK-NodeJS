@@ -16,7 +16,7 @@ export class TransactionHandler {
    * @returns {Promise<IOnboardTx>} Returns the built transaction
    * @memberof Transaction
    */
-  public onboardKey(key: IKey, contract?: string, namespace?: string): Promise<IOnboardTx> {
+  public buildOnboardKeyTx(key: IKey, contract?: string, namespace?: string): Promise<IOnboardTx> {
     if (contract) {
       this.contract = contract;
     }
@@ -42,14 +42,12 @@ export class TransactionHandler {
       };
 
       this.signTransaction(tx, key)
-      .then((txBody: IBaseTransaction) => {
-        resolve(txBody as IOnboardTx);
-      })
-      .catch((err: any) => {
-        reject(err);
-      })
-
-      
+        .then((txBody: IBaseTransaction) => {
+          resolve(txBody as IOnboardTx);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
   }
 
@@ -83,20 +81,16 @@ export class TransactionHandler {
    * @returns {Promise<any>} Returns the ledger response
    * @memberof Transaction
    */
-  public sendTransaction(
-    tx: IBaseTransaction | IOnboardTx,
-    connection: Connection
-  ): Promise<any> {
+  public sendTransaction(tx: IBaseTransaction | IOnboardTx, connection: Connection): Promise<any> {
     return new Promise((resolve, reject) => {
-        
-      connection.sendTransaction(tx)
-      .then((response: any) => {
-        resolve(response);
-      })
-      .catch((err: any) => {
-        reject(err);
-      })
+      connection
+        .sendTransaction(tx)
+        .then((response: any) => {
+          resolve(response);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
-
   }
 }
