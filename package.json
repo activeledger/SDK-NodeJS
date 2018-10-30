@@ -1,6 +1,6 @@
 {
   "name": "@activeledger/sdk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "NodeJS package for use when integrating with Activeledger",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,18 +10,34 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "pretty": "npm run lint && npm run format",
-    "prepare": "npm run build && npm run docs",
+    "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags",
+    "postversion": "git push public && git push public --tags",
     "docs": "rm -rf jsdoc && ts2jsdoc . && jsdoc .\\jsdoc\\out -d docs --readme ./README.md"
   },
+  "homepage": "https://activeledger.io",
   "keywords": [
     "activeledger",
     "nodejs",
-    "sdk"
+    "sdk",
+    "blockchain",
+    "dlt",
+    "distributed ledger technology",
+    "ledger",
+    "smart contracts",
+    "activeledger",
+    "network",
+    "node"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/activeledger/SDK-NodeJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/activeledger/SDK-NodeJS/issues"
+  },
   "author": "Activeledger",
   "license": "MIT",
   "devDependencies": {
@@ -36,6 +52,6 @@
     "typescript": "^3.1.4"
   },
   "dependencies": {
-    "@activeledger/activecrypto": "^2.0.0-rc.8.0.7"
+    "@activeledger/activecrypto": "^2.0.0-rc.8.0.8"
   }
 }
