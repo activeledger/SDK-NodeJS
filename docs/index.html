@@ -46,8 +46,8 @@
         <article><p><img src="https://www.activeledger.io/wp-content/uploads/2018/09/Asset-23.png" alt="Activeledger" width="500"/></p>
 <h1>Activeledger - Node SDK</h1><p>The Activeledger Node SDK has been built to provide an easy way to connect your Node based application with an Activeledger network.
 This SDK can be used in JavaScript and TypeScript projects.</p>
-<h3>GitHub</h3><p><a href="https://github.com/activeledger/nodejs-sdk">Repository here</a></p>
-<h3>Further Documentation</h3><p><a href="http://activeledger.github.io/nodejs-sdk">Documentation here</a></p>
+<h3>GitHub</h3><p><a href="https://github.com/activeledger/SDK-NodeJS/">Repository here</a></p>
+<h3>Further Documentation</h3><p><a href="https://activeledger.github.io/SDK-NodeJS/">Documentation here</a></p>
 <h2>Installation</h2><hr>
 <p>npm i -s @activeledger/sdk</p>
 <h2>Usage</h2><hr>
@@ -61,7 +61,85 @@ This SDK can be used in JavaScript and TypeScript projects.</p>
 </ul>
 <p>Once the SDK has been installed import the classes and interfaces as you need them.</p>
 <pre class="prettyprint source lang-typescript"><code>// Example
-import { Connection } from &quot;@activeledger/sdk&quot;;</code></pre><h3>Interfaces</h3><p>The Activeledger Node SDK provides multiple interfaces to provide you with </p>
+import { Connection } from &quot;@activeledger/sdk&quot;;</code></pre><h3>Enums</h3><p>The Activeledger Node SDK provides an enum to help handle key types.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Ref</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elliptic Curve</td>
+<td>KeyType.EllipticCurve</td>
+</tr>
+<tr>
+<td>RSA</td>
+<td>KeyType.RSA</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3>Interfaces</h3><p>The Activeledger Node SDK provides multiple interfaces to provide you with.</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IKey</td>
+<td>For Activeledger keys</td>
+</tr>
+<tr>
+<td>IOnboardTx</td>
+<td>Specifically for key onboarding, mainly used internally</td>
+</tr>
+<tr>
+<td>IOnboardTxBody</td>
+<td>Used by IOnboardTx for $tx variable</td>
+</tr>
+<tr>
+<td>INodeKeyData</td>
+<td>Used to hold the node key data for encrypting a transaction</td>
+</tr>
+<tr>
+<td>IHttpOptions</td>
+<td>Internal interface for setting HTTP options</td>
+</tr>
+<tr>
+<td>ILedgerResponse</td>
+<td>A helper for the ledger response</td>
+</tr>
+<tr>
+<td>ISummaryObject</td>
+<td>Used by ILedgerResponse</td>
+</tr>
+<tr>
+<td>IStreamsObject</td>
+<td>Used by ILedgerResponse</td>
+</tr>
+<tr>
+<td>INewObject</td>
+<td>Used by IStreamsObject</td>
+</tr>
+<tr>
+<td>IUpdatedObject</td>
+<td>Used by IStreamsObject</td>
+</tr>
+<tr>
+<td>IBaseTransaction</td>
+<td>Helper for creating transactions</td>
+</tr>
+<tr>
+<td>ITxBody</td>
+<td>Used by IBaseTransaction for the $tx variable</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h3>Connection</h3><p>When sending a transaction, you must pass a connection that provides the information needed to establish a link to the network and specified node.</p>
 <p>To do this a connection object must be created. This object must be passed the protocol, address, port, and optionally the encryption flag.</p>
@@ -71,17 +149,96 @@ const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260)
 
 // Use localhost but encrypt transactions
 const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260, true);</code></pre><hr>
-<h3>KeyHandler</h3><h4>Example</h4><pre class="prettyprint source lang-typescript"><code>import { Connection } from &quot;@activeledger/sdk&quot;;
-// Setup the connection object to use localhost over http unencrypted
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260);
+<h3>KeyHandler</h3><p>Note: Generating an RSA key is resource intensive and can take a few seconds.</p>
+<p>The Key Handler can be used to generate and onboard a key.</p>
+<p>The Key generation function and key onboard function are setup to be used separately as you may not want to immediately onboard a key. Additionally, you will need to store the key as it is used to sign all transactions involving the identity created when you onboard it.</p>
+<p>There are two key types that can be generated currently, more are planned and will be implemented into Activeledger first. These types are RSA and Elliptic Curve.</p>
+<h4>Generating a key</h4><p>When generating a key you must pass it a name and the key type.</p>
+<h5>Example</h5><p>Note: This example uses the IKey interface which provides the structure of the key</p>
+<pre class="prettyprint source lang-typescript"><code>import { 
+  KeyHandler,
+  IKey,
+  KeyType
+} from &quot;@activeledger/sdk&quot;;
 
-// Use localhost but encrypt transactions
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260, true);</code></pre><hr>
-<h3>TransactionHandler</h3><h4>Example</h4><pre class="prettyprint source lang-typescript"><code>// Setup the connection object to use localhost over http unencrypted
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260);
+const keyHandler = new KeyHandler();
 
-// Use localhost but encrypt transactions
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260, true);</code></pre><hr>
+let key: IKey;
+
+// Generate RSA Key
+keyHandler.generateKey(&quot;keyname&quot;, KeyType.RSA)
+.then((generatedKey: IKey) => {
+  key = generatedKey;
+})
+.catch();
+// or to generate an Elliptic Curve key
+// keyHandler.generateKey(&quot;keyname&quot;, KeyType.EllipticCurve)</code></pre><h4>Onboarding a key</h4><p>Once you have a key generated, to use it to sign transactions it must be onboarded to the ledger network</p>
+<h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { 
+  Connection,
+  KeyHandler,
+  IKey,
+  KeyType,
+  ILedgerResponse
+} from &quot;@activeledger/sdk&quot;;
+
+const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260);
+const keyHandler = new KeyHandler();
+
+let key: IKey;
+keyHandler.generateKey(&quot;keyname&quot;, KeyType.EllipticCurve)
+.then((generatedKey: IKey) => {
+  key = generatedKey;
+  return keyHandler.onboardKey(key, connection)
+})
+.then((ledgerResp: ILedgerResponse) => {
+  resolve(ledgerResp);
+})
+.catch();</code></pre><hr>
+<h3>TransactionHandler</h3><p>The Transaction Handler is used to sign and send transactions.</p>
+<p>You can use the IBaseTransaction as a helper when building a transaction to be sent to the ledger.</p>
+<h4>Signing a transaction</h4><p>When signing a transaction you must send the finished version of it. No changes can be made after signing as this will cause the ledger to reject it.</p>
+<p>You must pass the transaction and the correct key to this function. The key must be one that has been successfully onboarded to the ledger which the transaction is being sent to.</p>
+<h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { 
+  TransactionHandler,
+  IBaseTransaction
+} from &quot;@activeledger/sdk&quot;;
+
+// Connection and key code goes here if needed
+
+// Create a transaction. In this example a namespace onboarding transaction
+const txHandler = new TransactionHandler();
+const tx: IBaseTransaction = {
+  $sigs: {},
+  $tx: {
+    $contract: &quot;namespace&quot;,
+    $i: {},
+    $namespace: &quot;default&quot;,
+  },
+};
+
+// The identity of the key that the namespace will be linked to
+tx.$tx.$i[key.identity] = {
+  namespace: &quot;example-namespace&quot;,
+};
+
+// Sign the transaction
+txHandler.signTransaction(tx, key)
+.then((signedTx: IBaseTransaction) => {
+  tx = signedTx;
+})
+.catch();</code></pre><h4>Sending a transaction</h4><h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { 
+  TransactionHandler,
+  IBaseTransaction
+} from &quot;@activeledger/sdk&quot;;
+
+// Connection setup, Transaction building and signing here
+
+// Send the transaction
+txHandler.sendTransaction(tx, connection)
+.then((response: ILedgerResponse) => {
+  // Do something with the response
+})
+.catch();</code></pre><hr>
 <h3>JSDocs</h3><p>You can read further documentation <a href="out/index.html">here.</a></p>
 <h3>Activeledger</h3><p><a href="https://activeledger.io/">Visit Activeledger.io</a> </p>
 <p><a href="https://github.com/activeledger/activeledger">Read Activeledgers documentation</a></p>
@@ -103,7 +260,7 @@ const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260,
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 30 2018 12:30:14 GMT+0000 (Greenwich Mean Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 30 2018 13:58:20 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>
