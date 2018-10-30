@@ -1,6 +1,6 @@
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import { Connection } from "./connection";
-import { IBaseTransaction, IKey, IOnboardTx } from "./interfaces";
+import { IBaseTransaction, IKey, ILedgerResponse, IOnboardTx } from "./interfaces";
 
 export class TransactionHandler {
   private contract = "onboard";
@@ -51,6 +51,14 @@ export class TransactionHandler {
     });
   }
 
+  /**
+   * Sign the provided transaction and add it to the body
+   *
+   * @param {IBaseTransaction} txBody - The transaction to sign
+   * @param {IKey} key - The key to use to sign
+   * @returns {Promise<IBaseTransaction>} Returns the transaction with its signature
+   * @memberof TransactionHandler
+   */
   public signTransaction(txBody: IBaseTransaction, key: IKey): Promise<IBaseTransaction> {
     return new Promise((resolve, reject) => {
       try {
@@ -75,17 +83,15 @@ export class TransactionHandler {
    * Send a transaction to the ledger
    *
    * @param {(IBaseTransaction | IOnboardTx)} tx - The transaction to send
-   * @param {string} protocol - http or https
-   * @param {string} address - The IP address or domain name e.g 0.0.0.0 or www.example.com
-   * @param {number} port - The port to use
-   * @returns {Promise<any>} Returns the ledger response
+   * @param {Connection} connection - The connection to send the transaction over
+   * @returns {Promise<ILedgerResponse>} Returns the ledger response
    * @memberof Transaction
    */
-  public sendTransaction(tx: IBaseTransaction | IOnboardTx, connection: Connection): Promise<any> {
+  public sendTransaction(tx: IBaseTransaction | IOnboardTx, connection: Connection): Promise<ILedgerResponse> {
     return new Promise((resolve, reject) => {
       connection
         .sendTransaction(tx)
-        .then((response: any) => {
+        .then((response: ILedgerResponse) => {
           resolve(response);
         })
         .catch((err: any) => {

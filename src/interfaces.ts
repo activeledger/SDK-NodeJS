@@ -38,6 +38,37 @@ export interface IHttpOptions {
   port: number;
 }
 
+// Ledger response interfaces
+
+export interface ILedgerResponse {
+  $umid: string;
+  $summary: ISummaryObject;
+  $streams: IStreamsObject;
+}
+
+interface ISummaryObject {
+  total: number;
+  vote: number;
+  commit: number;
+}
+
+interface IStreamsObject {
+  new: INewObject[];
+  updated: IUpdatedObject[];
+}
+
+interface INewObject {
+  id: string;
+  name: string;
+}
+
+interface IUpdatedObject {
+  id: string;
+  name: string;
+}
+
+// Transaction Interfaces
+
 export interface IBaseTransaction {
   $selfsign?: boolean;
   $sigs: any;
