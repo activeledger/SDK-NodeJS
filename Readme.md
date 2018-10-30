@@ -14,11 +14,9 @@ This SDK can be used in JavaScript and TypeScript projects.
 [Documentation here](https://activeledger.github.io/SDK-NodeJS/)
 
 ## Installation
-***
 npm i -s @activeledger/sdk
 
 ## Usage
-***
 The SDK currently supports the following functionality
 * Connection handling
 * Key generation
@@ -39,7 +37,6 @@ The Activeledger Node SDK provides an enum to help handle key types.
 |---|---|
 |Elliptic Curve|KeyType.EllipticCurve|
 |RSA|KeyType.RSA|
-***
 
 ### Interfaces
 The Activeledger Node SDK provides multiple interfaces to provide you with.
@@ -59,7 +56,6 @@ The Activeledger Node SDK provides multiple interfaces to provide you with.
 |IBaseTransaction|Helper for creating transactions|
 |ITxBody|Used by IBaseTransaction for the $tx variable|
 
-***
 ### Connection
 
 When sending a transaction, you must pass a connection that provides the information needed to establish a link to the network and specified node.
