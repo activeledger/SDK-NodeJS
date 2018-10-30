@@ -1,7 +1,7 @@
 import { Connection } from "../connection";
 import { KeyType } from "../enums";
 import { KeyHandler } from "../index";
-import { IKey } from "../interfaces";
+import { IKey, ILedgerResponse } from "../interfaces";
 
 test("Create Elliptic Curve Key", async () => {
   const name = "ec-test";
@@ -30,7 +30,7 @@ test("Onboard Key", () => {
   const connection = new Connection("http", "localhost", 5260);
 
   keyHandler.generateKey("test-onboard", KeyType.EllipticCurve).then((key: IKey) => {
-    keyHandler.onboardKey(key, connection).then((res: any) => {
+    keyHandler.onboardKey(key, connection).then((res: ILedgerResponse) => {
       expect(res.$streams.new).not.toBeUndefined();
     });
   });
