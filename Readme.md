@@ -14,8 +14,9 @@ This SDK can be used in JavaScript and TypeScript projects.
 [Documentation here](https://activeledger.github.io/SDK-NodeJS/)
 
 ## Installation
-npm i -s @activeledger/sdk
-
+```
+$ npm i -s @activeledger/sdk
+```
 ## Usage
 The SDK currently supports the following functionality
 * Connection handling

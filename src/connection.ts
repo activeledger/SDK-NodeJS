@@ -22,15 +22,13 @@
  */
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
-import * as http from "http";
-import * as https from "https";
-import { IBaseTransaction, IHttpOptions, ILedgerResponse, INodeKeyData } from "./interfaces";
+import Axios, { AxiosResponse } from "axios";
+import { IBaseTransaction, IHttpOptions, ILedgerResponse, INodeKeyData } from './interfaces';
 
 export class Connection {
   private protocol: string;
   private address: string;
   private port: number;
-  private protocolService: any;
 
   private encryptTx = false;
 
@@ -51,24 +49,17 @@ export class Connection {
    */
   constructor(protocol: string, address: string, portNumber: number, encrypt?: boolean) {
     this.httpOptions = {
+      baseURL: protocol + "://" + address + ":" + portNumber,
       headers: {
         "Content-Type": "application/json",
       },
-      hostname: address,
       method: "POST",
-      path: "/",
       port: portNumber,
     };
 
     this.protocol = protocol;
     this.address = address;
     this.port = portNumber;
-
-    if (protocol === "https") {
-      this.protocolService = https;
-    } else {
-      this.protocolService = http;
-    }
 
     if (encrypt) {
       this.encryptTx = encrypt;
@@ -124,33 +115,17 @@ export class Connection {
    */
   private postTransaction(tx: string | IBaseTransaction): Promise<ILedgerResponse> {
     return new Promise((resolve, reject) => {
-      const req = this.protocolService.request(this.httpOptions, (res: any) => {
-        if (res.statusCode !== 200) {
-          reject(res);
-        }
+      
+      this.httpOptions.data = tx;
 
-        let body: string = "";
-
-        res.setEncoding("utf8");
-        res.on("data", (chunk: any) => {
-          body += chunk;
-        });
-
-        res.on("end", () => {
-          return resolve(JSON.parse(body));
-        });
+      Axios(this.httpOptions)
+      .then((resp: AxiosResponse) => {
+        resolve(resp.data as ILedgerResponse);
+      })
+      .catch((err: any) => {
+        reject(err);
       });
-
-      req.on("error", (err: any) => {
-        return reject(err);
-      });
-
-      if (typeof tx !== "string") {
-        tx = JSON.stringify(tx);
-      }
-
-      req.write(tx);
-      req.end();
+      
     });
   }
 
@@ -190,28 +165,21 @@ export class Connection {
     return new Promise((resolve, reject) => {
       const url = `${this.protocol}://${this.address}:${this.port}/a/status`;
 
-      this.protocolService
-        .get(url, (resp: any) => {
-          let data = "";
+      Axios.get(url)
+      .then((resp: AxiosResponse) => {
+        const jsonData = JSON.parse(resp.data);
 
-          resp.on("data", (chunk: any) => {
-            data += chunk;
-          });
+        const nodeKey: INodeKeyData = {
+          encryption: "rsa",
+          pem: Buffer.from(jsonData.pem, "base64").toString(),
+        };
 
-          resp.on("end", () => {
-            const jsonData = JSON.parse(data);
+        resolve(nodeKey);
+      })
+      .catch((err: any) => {
+        reject(err);
+      });
 
-            const nodeKey: INodeKeyData = {
-              encryption: "rsa",
-              pem: Buffer.from(jsonData.pem, "base64").toString(),
-            };
-
-            resolve(nodeKey);
-          });
-        })
-        .on("error", (err: any) => {
-          reject(err);
-        });
     });
   }
 }

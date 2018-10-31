@@ -52,6 +52,7 @@
     "typescript": "^3.1.4"
   },
   "dependencies": {
-    "@activeledger/activecrypto": "^2.0.0-rc.8.0.8"
+    "@activeledger/activecrypto": "^2.0.0-rc.8.0.8",
+    "axios": "^0.18.0"
   }
 }

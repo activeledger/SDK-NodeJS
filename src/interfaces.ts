@@ -54,10 +54,11 @@ export interface INodeKeyData {
 }
 
 export interface IHttpOptions {
+  baseURL: string;
+  data?: any;
   headers?: any;
-  hostname: string;
   method: string;
-  path: string;
+  path?: string;
   port: number;
 }
 
