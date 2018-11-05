@@ -167,7 +167,7 @@ export class Connection {
 
       Axios.get(url)
       .then((resp: AxiosResponse) => {
-        const jsonData = JSON.parse(resp.data);
+        const jsonData = resp.data;
 
         const nodeKey: INodeKeyData = {
           encryption: "rsa",

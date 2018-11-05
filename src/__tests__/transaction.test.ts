@@ -6,7 +6,7 @@ import { TransactionHandler } from "../transaction";
 
 jest.useFakeTimers();
 
-/* test("Send an encrypted onboard transaction", () => {
+test("Send an encrypted onboard transaction", () => {
   const keyHandler = new KeyHandler();
   const connection = new Connection("http", "localhost", 5260, true);
 
@@ -15,7 +15,7 @@ jest.useFakeTimers();
       expect(res.$streams.new).not.toBeUndefined();
     });
   });
-}, 30000); */
+}, 30000);
 
 test("Create a namespace transaction", async () => {
   const keyHandler = new KeyHandler();
