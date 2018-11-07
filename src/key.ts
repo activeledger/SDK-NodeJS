@@ -22,6 +22,7 @@
  */
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
+import * as fs from "fs";
 import { Connection } from "./connection";
 import { KeyType } from "./enums";
 import { IKey, ILedgerResponse, IOnboardTx } from "./interfaces";
@@ -88,4 +89,112 @@ export class KeyHandler {
       });
     });
   }
+
+  /**
+   * Export a key to a file
+   *
+   * @param {IKey} key - The key to export
+   * @param {string} location - The location to save the key to
+   * @param {boolean} [createDir] - (Optional) Create the directory structure
+   * @param {boolean} [overwrite] - (Optional) Overwrite an existing file if it exists
+   * @param {string} [name] - (Optional) - Set a name for the file
+   * @returns {Promise<void>}
+   * @memberof KeyHandler
+   */
+  public exportKey(
+    key: IKey,
+    location: string,
+    createDir?: boolean,
+    overwrite?: boolean,
+    name?: string,
+  ): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+
+      // Recursively create dir
+      if (createDir) {
+        try {
+          fs.mkdirSync(location, {recursive: true});
+        } catch (err) {
+          reject(err);
+        }
+      }
+
+      // Strip trailing /
+      location = this.stripTrailing(location);
+
+      // Set name of file
+      let path = `${location}/${key.name}.json`;
+      if (name) {
+        path = `${location}/${name}.json`;
+      }
+
+      // Check folder exists
+      const dirExists = fs.existsSync(location);
+      if (dirExists) {
+        // Check if the file exists
+        const fileExists = fs.existsSync(path);
+        // If exists and overwrite is false
+        if (fileExists && !overwrite) {
+          reject("File already exists, set overwrite to true or use a different name");
+        } else {
+          // Write
+          fs.writeFile(path, JSON.stringify(key), err => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        }
+      } else {
+        reject("Unable to find location");
+      }
+    });
+  }
+
+  /**
+   * Import a key from a file
+   *
+   * @param {string} path - The location of the key file
+   * @returns {Promise<IKey>}
+   * @memberof KeyHandler
+   */
+  public importKey(path: string): Promise<IKey> {
+    return new Promise((resolve, reject) => {
+      // Check if the file exists
+      fs.exists(path, (fileExists: boolean) => {
+        // If exists and overwrite is false
+        if (fileExists) {
+          // read
+          fs.readFile(path, (err, buffer) => {
+            if (err) {
+              reject(err);
+            } else {
+              const data = buffer.toString();
+              resolve(JSON.parse(data) as IKey);
+            }
+          });
+        } else {
+          reject("File already exists, set overwrite to true or use a different name");
+        }
+      });
+    });
+  }
+
+  /**
+   * Remove a trailing / from the location
+   *
+   * @private
+   * @param {string} path - String to strip from
+   * @returns {string}
+   * @memberof KeyHandler
+   */
+  private stripTrailing(path: string): string {
+    const lastChar = path.slice(path.length-1, path.length);
+    if (lastChar === "/") {
+      return path.slice(0, path.length-1);
+    } 
+    return path;
+  }
+
 }

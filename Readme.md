@@ -126,14 +126,63 @@ let key: IKey;
 keyHandler.generateKey("keyname", KeyType.EllipticCurve)
 .then((generatedKey: IKey) => {
   key = generatedKey;
-  return keyHandler.onboardKey(key, connection)
+  return keyHandler.onboardKey(key, connection);
 })
 .then((ledgerResp: ILedgerResponse) => {
   resolve(ledgerResp);
 })
 .catch();
 ```
+
+#### Exporting a key
+You can use the SDK to export a key in JSON format to the filesystem. This will be in the same structure as the IKey interface.
+
+When exporting a key the required parameters are the Key object and the location to store it.
+Note that the location should not include the name of the file, this is an optional parameter.
+
+|Parameter|Description|Type|Required|
+|---------|-----------|----|--------|
+|key|The Key object|IKey|Yes|
+|location|The storage location|string|Yes|
+|createDir|Create directory if it doesn't exist|boolean|No|
+|overwrite|Overwrite a file with the same name|boolean|No|
+|name|The name of the file|string|No|
+
+##### Example
+```typescript
+import { KeyHandler } from "@activeledger/sdk";
+
+const keyHandler = new KeyHandler();
+
+const key: IKey = await keyHandler.generateKey("Key Name", KeyType.EllipticCurve);
+keyHandler.exportKey(key, "./")
+.then(() => {
+  // Now export is finished do something
+});
+```
+
+#### Importing a key
+You can also use the SDK to import a key from the file system. Note that this key file must follow the same structure as the IKey interface.
+
+The import function requires that the location parameter includes the file name with .json extension.
+
+|Parameter|Description|Type|Required|
+|---------|-----------|----|--------|
+|location|The storage location|string|Yes|
+
+##### Example
+```typescript
+import { KeyHandler } from "@activeledger/sdk";
+
+const keyHandler = new KeyHandler();
+keyHandler.importKey(`./${key.name}.json`)
+.then((importedKey: IKey) => {
+  // Do something with the key
+});
+
+```
 ***
+
 ### TransactionHandler
 
 The Transaction Handler is used to sign and send transactions.

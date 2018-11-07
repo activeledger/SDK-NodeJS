@@ -1,6 +1,6 @@
 {
   "name": "@activeledger/sdk",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "NodeJS package for use when integrating with Activeledger",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -15,7 +15,7 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push public && git push public --tags",
-    "docs": "rm -rf jsdoc && ts2jsdoc . && jsdoc .\\jsdoc\\out -d docs --readme ./README.md"
+    "docs": "rm -rf jsdoc && jsdoc .\\jsdoc\\out -d docs --readme ./README.md"
   },
   "homepage": "https://activeledger.io",
   "keywords": [
@@ -41,18 +41,20 @@
   "author": "Activeledger",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^23.3.8",
-    "@types/node": "^10.12.1",
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.2",
     "jest": "^23.6.0",
     "jext": "^0.4.3",
-    "prettier": "^1.14.3",
+    "jsdoc": "^3.5.5",
+    "prettier": "^1.15.1",
     "ts-jest": "^23.10.4",
+    "ts2jsdoc": "^0.1.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.1.4"
+    "typescript": "^3.1.6"
   },
   "dependencies": {
-    "@activeledger/activecrypto": "^2.0.0-rc.8.0.8",
+    "@activeledger/activecrypto": "^2.0.0-rc.8.0.13",
     "axios": "^0.18.0"
   }
 }
