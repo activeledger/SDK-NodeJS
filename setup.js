@@ -40,6 +40,13 @@ const fs = require("fs");
     }
   });
 
+  // Delete overwrite file
+  fs.unlink("./overwrite-me.json", (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
   // Delete create dir test folders and file
   fs.unlink("./export/test/test-export.json", (err) => {
     if (err) {
