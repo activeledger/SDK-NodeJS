@@ -1,343 +1,470 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="default no-js">
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Home</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@activeledger/sdk</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
 </head>
-
 <body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@activeledger/sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> @activeledger/sdk</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<img src="https://www.activeledger.io/wp-content/uploads/2018/09/Asset-23.png" alt="Activeledger" width="500"/>
+				<h1 id="activeledger-node-sdk">Activeledger - Node SDK</h1>
+				<p>The Activeledger Node SDK has been built to provide an easy way to connect your Node based application with an Activeledger network.
+				This SDK can be used in JavaScript and TypeScript projects.</p>
+				<h3 id="github">GitHub</h3>
+				<p><a href="https://github.com/activeledger/SDK-NodeJS/">Repository here</a></p>
+				<h3 id="further-documentation">Further Documentation</h3>
+				<p><a href="https://activeledger.github.io/SDK-NodeJS/">Documentation here</a></p>
+				<h2 id="installation">Installation</h2>
+				<pre><code>$ <span class="hljs-built_in">npm</span> i -s @activeledger/sdk</code></pre><h2 id="usage">Usage</h2>
+				<p>The SDK currently supports the following functionality</p>
+				<ul>
+					<li>Connection handling</li>
+					<li>Key generation</li>
+					<li>Key onboarding</li>
+					<li>Transaction building</li>
+					<li>Encrypted &amp; unencrypted transaction posting</li>
+				</ul>
+				<p>Once the SDK has been installed import the classes and interfaces as you need them.</p>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Example</span>
+<span class="hljs-keyword">import</span> { Connection } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;</code></pre>
+				<h3 id="enums">Enums</h3>
+				<p>The Activeledger Node SDK provides an enum to help handle key types.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Key</th>
+							<th>Ref</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>Elliptic Curve</td>
+							<td>KeyType.EllipticCurve</td>
+						</tr>
+						<tr>
+							<td>RSA</td>
+							<td>KeyType.RSA</td>
+						</tr>
+				</tbody></table>
+				<h3 id="interfaces">Interfaces</h3>
+				<p>The Activeledger Node SDK provides multiple interfaces to provide you with.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Interface</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>IKey</td>
+							<td>For Activeledger keys</td>
+						</tr>
+						<tr>
+							<td>IOnboardTx</td>
+							<td>Specifically for key onboarding, mainly used internally</td>
+						</tr>
+						<tr>
+							<td>IOnboardTxBody</td>
+							<td>Used by IOnboardTx for $tx variable</td>
+						</tr>
+						<tr>
+							<td>INodeKeyData</td>
+							<td>Used to hold the node key data for encrypting a transaction</td>
+						</tr>
+						<tr>
+							<td>IHttpOptions</td>
+							<td>Internal interface for setting HTTP options</td>
+						</tr>
+						<tr>
+							<td>ILedgerResponse</td>
+							<td>A helper for the ledger response</td>
+						</tr>
+						<tr>
+							<td>ISummaryObject</td>
+							<td>Used by ILedgerResponse</td>
+						</tr>
+						<tr>
+							<td>IStreamsObject</td>
+							<td>Used by ILedgerResponse</td>
+						</tr>
+						<tr>
+							<td>INewObject</td>
+							<td>Used by IStreamsObject</td>
+						</tr>
+						<tr>
+							<td>IUpdatedObject</td>
+							<td>Used by IStreamsObject</td>
+						</tr>
+						<tr>
+							<td>IBaseTransaction</td>
+							<td>Helper for creating transactions</td>
+						</tr>
+						<tr>
+							<td>ITxBody</td>
+							<td>Used by IBaseTransaction for the $tx variable</td>
+						</tr>
+				</tbody></table>
+				<h3 id="connection">Connection</h3>
+				<p>When sending a transaction, you must pass a connection that provides the information needed to establish a link to the network and specified node.</p>
+				<p>To do this a connection object must be created. This object must be passed the protocol, address, port, and optionally the encryption flag.</p>
+				<h4 id="example">Example</h4>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Connection } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
+<span class="hljs-comment">// Setup the connection object to use localhost over http unencrypted</span>
+<span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(<span class="hljs-string">"http"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">5260</span>);
 
-<div id="main">
-
-    <h1 class="page-title">Home</h1>
-
-    
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-    <section>
-        <article><p><img src="https://www.activeledger.io/wp-content/uploads/2018/09/Asset-23.png" alt="Activeledger" width="500"/></p>
-<h1>Activeledger - Node SDK</h1><p>The Activeledger Node SDK has been built to provide an easy way to connect your Node based application with an Activeledger network.
-This SDK can be used in JavaScript and TypeScript projects.</p>
-<h3>GitHub</h3><p><a href="https://github.com/activeledger/SDK-NodeJS/">Repository here</a></p>
-<h3>Further Documentation</h3><p><a href="https://activeledger.github.io/SDK-NodeJS/">Documentation here</a></p>
-<h2>Installation</h2><pre class="prettyprint source"><code>$ npm i -s @activeledger/sdk</code></pre><h2>Usage</h2><p>The SDK currently supports the following functionality</p>
-<ul>
-<li>Connection handling</li>
-<li>Key generation</li>
-<li>Key onboarding</li>
-<li>Transaction building</li>
-<li>Encrypted &amp; unencrypted transaction posting</li>
-</ul>
-<p>Once the SDK has been installed import the classes and interfaces as you need them.</p>
-<pre class="prettyprint source lang-typescript"><code>// Example
-import { Connection } from &quot;@activeledger/sdk&quot;;</code></pre><h3>Enums</h3><p>The Activeledger Node SDK provides an enum to help handle key types.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Ref</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Elliptic Curve</td>
-<td>KeyType.EllipticCurve</td>
-</tr>
-<tr>
-<td>RSA</td>
-<td>KeyType.RSA</td>
-</tr>
-</tbody>
-</table>
-<h3>Interfaces</h3><p>The Activeledger Node SDK provides multiple interfaces to provide you with.</p>
-<table>
-<thead>
-<tr>
-<th>Interface</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IKey</td>
-<td>For Activeledger keys</td>
-</tr>
-<tr>
-<td>IOnboardTx</td>
-<td>Specifically for key onboarding, mainly used internally</td>
-</tr>
-<tr>
-<td>IOnboardTxBody</td>
-<td>Used by IOnboardTx for $tx variable</td>
-</tr>
-<tr>
-<td>INodeKeyData</td>
-<td>Used to hold the node key data for encrypting a transaction</td>
-</tr>
-<tr>
-<td>IHttpOptions</td>
-<td>Internal interface for setting HTTP options</td>
-</tr>
-<tr>
-<td>ILedgerResponse</td>
-<td>A helper for the ledger response</td>
-</tr>
-<tr>
-<td>ISummaryObject</td>
-<td>Used by ILedgerResponse</td>
-</tr>
-<tr>
-<td>IStreamsObject</td>
-<td>Used by ILedgerResponse</td>
-</tr>
-<tr>
-<td>INewObject</td>
-<td>Used by IStreamsObject</td>
-</tr>
-<tr>
-<td>IUpdatedObject</td>
-<td>Used by IStreamsObject</td>
-</tr>
-<tr>
-<td>IBaseTransaction</td>
-<td>Helper for creating transactions</td>
-</tr>
-<tr>
-<td>ITxBody</td>
-<td>Used by IBaseTransaction for the $tx variable</td>
-</tr>
-</tbody>
-</table>
-<h3>Connection</h3><p>When sending a transaction, you must pass a connection that provides the information needed to establish a link to the network and specified node.</p>
-<p>To do this a connection object must be created. This object must be passed the protocol, address, port, and optionally the encryption flag.</p>
-<h4>Example</h4><pre class="prettyprint source lang-typescript"><code>import { Connection } from &quot;@activeledger/sdk&quot;;
-// Setup the connection object to use localhost over http unencrypted
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260);
-
-// Use localhost but encrypt transactions
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260, true);</code></pre><hr>
-<h3>KeyHandler</h3><p>Note: Generating an RSA key is resource intensive and can take a few seconds.</p>
-<p>The Key Handler can be used to generate and onboard a key.</p>
-<p>The Key generation function and key onboard function are setup to be used separately as you may not want to immediately onboard a key. Additionally, you will need to store the key as it is used to sign all transactions involving the identity created when you onboard it.</p>
-<p>There are two key types that can be generated currently, more are planned and will be implemented into Activeledger first. These types are RSA and Elliptic Curve.</p>
-<h4>Generating a key</h4><p>When generating a key you must pass it a name and the key type.</p>
-<h5>Example</h5><p>Note: This example uses the IKey interface which provides the structure of the key</p>
-<pre class="prettyprint source lang-typescript"><code>import { 
+<span class="hljs-comment">// Use localhost but encrypt transactions</span>
+<span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(<span class="hljs-string">"http"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">5260</span>, <span class="hljs-literal">true</span>);</code></pre>
+				<hr>
+				<h3 id="keyhandler">KeyHandler</h3>
+				<p>Note: Generating an RSA key is resource intensive and can take a few seconds.</p>
+				<p>The Key Handler can be used to generate and onboard a key.</p>
+				<p>The Key generation function and key onboard function are setup to be used separately as you may not want to immediately onboard a key. Additionally, you will need to store the key as it is used to sign all transactions involving the identity created when you onboard it.</p>
+				<p>There are two key types that can be generated currently, more are planned and will be implemented into Activeledger first. These types are RSA and Elliptic Curve.</p>
+				<h4 id="generating-a-key">Generating a key</h4>
+				<p>When generating a key you must pass it a name and the key type.</p>
+				<h5 id="example">Example</h5>
+				<p>Note: This example uses the IKey interface which provides the structure of the key</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
   KeyHandler,
   IKey,
   KeyType
-} from &quot;@activeledger/sdk&quot;;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
-const keyHandler = new KeyHandler();
+<span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
 
-let key: IKey;
+<span class="hljs-keyword">let</span> key: IKey;
 
-// Generate RSA Key
-keyHandler.generateKey(&quot;keyname&quot;, KeyType.RSA)
-.then((generatedKey: IKey) => {
+<span class="hljs-comment">// Generate RSA Key</span>
+keyHandler.generateKey(<span class="hljs-string">"keyname"</span>, KeyType.RSA)
+.then(<span class="hljs-function">(<span class="hljs-params">generatedKey: IKey</span>) =&gt;</span> {
   key = generatedKey;
 })
 .catch();
-// or to generate an Elliptic Curve key
-// keyHandler.generateKey(&quot;keyname&quot;, KeyType.EllipticCurve)</code></pre><h4>Onboarding a key</h4><p>Once you have a key generated, to use it to sign transactions it must be onboarded to the ledger network</p>
-<h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { 
+<span class="hljs-comment">// or to generate an Elliptic Curve key</span>
+<span class="hljs-comment">// keyHandler.generateKey("keyname", KeyType.EllipticCurve)</span></code></pre>
+				<h4 id="onboarding-a-key">Onboarding a key</h4>
+				<p>Once you have a key generated, to use it to sign transactions it must be onboarded to the ledger network</p>
+				<h5 id="example">Example</h5>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
   Connection,
   KeyHandler,
   IKey,
   KeyType,
   ILedgerResponse
-} from &quot;@activeledger/sdk&quot;;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
-const connection = new Connection(&quot;http&quot;, &quot;localhost&quot;, 5260);
-const keyHandler = new KeyHandler();
+<span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(<span class="hljs-string">"http"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">5260</span>);
+<span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
 
-let key: IKey;
-keyHandler.generateKey(&quot;keyname&quot;, KeyType.EllipticCurve)
-.then((generatedKey: IKey) => {
+<span class="hljs-keyword">let</span> key: IKey;
+keyHandler.generateKey(<span class="hljs-string">"keyname"</span>, KeyType.EllipticCurve)
+.then(<span class="hljs-function">(<span class="hljs-params">generatedKey: IKey</span>) =&gt;</span> {
   key = generatedKey;
-  return keyHandler.onboardKey(key, connection);
+  <span class="hljs-keyword">return</span> keyHandler.onboardKey(key, connection);
 })
-.then((ledgerResp: ILedgerResponse) => {
+.then(<span class="hljs-function">(<span class="hljs-params">ledgerResp: ILedgerResponse</span>) =&gt;</span> {
   resolve(ledgerResp);
 })
-.catch();</code></pre><h4>Exporting a key</h4><p>You can use the SDK to export a key in JSON format to the filesystem. This will be in the same structure as the IKey interface.</p>
-<p>When exporting a key the required parameters are the Key object and the location to store it.
-Note that the location should not include the name of the file, this is an optional parameter.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Type</th>
-<th>Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>key</td>
-<td>The Key object</td>
-<td>IKey</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>location</td>
-<td>The storage location</td>
-<td>string</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>createDir</td>
-<td>Create directory if it doesn't exist</td>
-<td>boolean</td>
-<td>No</td>
-</tr>
-<tr>
-<td>overwrite</td>
-<td>Overwrite a file with the same name</td>
-<td>boolean</td>
-<td>No</td>
-</tr>
-<tr>
-<td>name</td>
-<td>The name of the file</td>
-<td>string</td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
-<h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { KeyHandler } from &quot;@activeledger/sdk&quot;;
+.catch();</code></pre>
+				<h4 id="exporting-a-key">Exporting a key</h4>
+				<p>You can use the SDK to export a key in JSON format to the filesystem. This will be in the same structure as the IKey interface.</p>
+				<p>When exporting a key the required parameters are the Key object and the location to store it.
+				Note that the location should not include the name of the file, this is an optional parameter.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Description</th>
+							<th>Type</th>
+							<th>Required</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>key</td>
+							<td>The Key object</td>
+							<td>IKey</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td>location</td>
+							<td>The storage location</td>
+							<td>string</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td>createDir</td>
+							<td>Create directory if it doesn&#39;t exist</td>
+							<td>boolean</td>
+							<td>No</td>
+						</tr>
+						<tr>
+							<td>overwrite</td>
+							<td>Overwrite a file with the same name</td>
+							<td>boolean</td>
+							<td>No</td>
+						</tr>
+						<tr>
+							<td>name</td>
+							<td>The name of the file</td>
+							<td>string</td>
+							<td>No</td>
+						</tr>
+				</tbody></table>
+				<h5 id="example">Example</h5>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { KeyHandler } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
-const keyHandler = new KeyHandler();
+<span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
 
-const key: IKey = await keyHandler.generateKey(&quot;Key Name&quot;, KeyType.EllipticCurve);
-keyHandler.exportKey(key, &quot;./&quot;)
-.then(() => {
-  // Now export is finished do something
-});</code></pre><h4>Importing a key</h4><p>You can also use the SDK to import a key from the file system. Note that this key file must follow the same structure as the IKey interface.</p>
-<p>The import function requires that the location parameter includes the file name with .json extension.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Type</th>
-<th>Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>location</td>
-<td>The storage location</td>
-<td>string</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { KeyHandler } from &quot;@activeledger/sdk&quot;;
+<span class="hljs-keyword">const</span> key: IKey = <span class="hljs-keyword">await</span> keyHandler.generateKey(<span class="hljs-string">"Key Name"</span>, KeyType.EllipticCurve);
+keyHandler.exportKey(key, <span class="hljs-string">"./"</span>)
+.then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-comment">// Now export is finished do something</span>
+});</code></pre>
+				<h4 id="importing-a-key">Importing a key</h4>
+				<p>You can also use the SDK to import a key from the file system. Note that this key file must follow the same structure as the IKey interface.</p>
+				<p>The import function requires that the location parameter includes the file name with .json extension.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Parameter</th>
+							<th>Description</th>
+							<th>Type</th>
+							<th>Required</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>location</td>
+							<td>The storage location</td>
+							<td>string</td>
+							<td>Yes</td>
+						</tr>
+				</tbody></table>
+				<h5 id="example">Example</h5>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { KeyHandler } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
-const keyHandler = new KeyHandler();
-keyHandler.importKey(`./${key.name}.json`)
-.then((importedKey: IKey) => {
-  // Do something with the key
-});</code></pre><hr>
-<h3>TransactionHandler</h3><p>The Transaction Handler is used to sign and send transactions.</p>
-<p>You can use the IBaseTransaction as a helper when building a transaction to be sent to the ledger.</p>
-<h4>Signing a transaction</h4><p>When signing a transaction you must send the finished version of it. No changes can be made after signing as this will cause the ledger to reject it.</p>
-<p>You must pass the transaction and the correct key to this function. The key must be one that has been successfully onboarded to the ledger which the transaction is being sent to.</p>
-<h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { 
+<span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
+keyHandler.importKey(<span class="hljs-string">`./<span class="hljs-subst">${key.name}</span>.json`</span>)
+.then(<span class="hljs-function">(<span class="hljs-params">importedKey: IKey</span>) =&gt;</span> {
+  <span class="hljs-comment">// Do something with the key</span>
+});
+</code></pre>
+				<hr>
+				<h3 id="transactionhandler">TransactionHandler</h3>
+				<p>The Transaction Handler is used to sign and send transactions.</p>
+				<p>You can use the IBaseTransaction as a helper when building a transaction to be sent to the ledger.</p>
+				<h4 id="signing-a-transaction">Signing a transaction</h4>
+				<p>When signing a transaction you must send the finished version of it. No changes can be made after signing as this will cause the ledger to reject it.</p>
+				<p>You must pass the transaction and the correct key to this function. The key must be one that has been successfully onboarded to the ledger which the transaction is being sent to.</p>
+				<h5 id="example">Example</h5>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
   TransactionHandler,
   IBaseTransaction
-} from &quot;@activeledger/sdk&quot;;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
-// Connection and key code goes here if needed
+<span class="hljs-comment">// Connection and key code goes here if needed</span>
 
-// Create a transaction. In this example a namespace onboarding transaction
-const txHandler = new TransactionHandler();
-const tx: IBaseTransaction = {
+<span class="hljs-comment">// Create a transaction. In this example a namespace onboarding transaction</span>
+<span class="hljs-keyword">const</span> txHandler = <span class="hljs-keyword">new</span> TransactionHandler();
+<span class="hljs-keyword">const</span> tx: IBaseTransaction = {
   $sigs: {},
   $tx: {
-    $contract: &quot;namespace&quot;,
+    $contract: <span class="hljs-string">"namespace"</span>,
     $i: {},
-    $namespace: &quot;default&quot;,
+    $<span class="hljs-keyword">namespace</span>: <span class="hljs-string">"default"</span>,
   },
 };
 
-// The identity of the key that the namespace will be linked to
+<span class="hljs-comment">// The identity of the key that the namespace will be linked to</span>
 tx.$tx.$i[key.identity] = {
-  namespace: &quot;example-namespace&quot;,
+  <span class="hljs-keyword">namespace</span>: <span class="hljs-string">"example-namespace"</span>,
 };
 
-// Sign the transaction
+<span class="hljs-comment">// Sign the transaction</span>
 txHandler.signTransaction(tx, key)
-.then((signedTx: IBaseTransaction) => {
+.then(<span class="hljs-function">(<span class="hljs-params">signedTx: IBaseTransaction</span>) =&gt;</span> {
   tx = signedTx;
 })
-.catch();</code></pre><h4>Sending a transaction</h4><h5>Example</h5><pre class="prettyprint source lang-typescript"><code>import { 
+.catch();</code></pre>
+				<h4 id="sending-a-transaction">Sending a transaction</h4>
+				<h5 id="example">Example</h5>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
   TransactionHandler,
   IBaseTransaction
-} from &quot;@activeledger/sdk&quot;;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
-// Connection setup, Transaction building and signing here
+<span class="hljs-comment">// Connection setup, Transaction building and signing here</span>
 
-// Send the transaction
+<span class="hljs-comment">// Send the transaction</span>
 txHandler.sendTransaction(tx, connection)
-.then((response: ILedgerResponse) => {
-  // Do something with the response
+.then(<span class="hljs-function">(<span class="hljs-params">response: ILedgerResponse</span>) =&gt;</span> {
+  <span class="hljs-comment">// Do something with the response</span>
 })
-.catch();</code></pre><hr>
-<h3>JSDocs</h3><p>You can read further documentation <a href="out/index.html">here.</a></p>
-<h3>Activeledger</h3><p><a href="https://activeledger.io/">Visit Activeledger.io</a> </p>
-<p><a href="https://github.com/activeledger/activeledger">Read Activeledgers documentation</a></p>
-<h2>License</h2><hr>
-<p>This project is licensed under the <a href="https://github.com/activeledger/activeledger/blob/master/LICENSE">MIT</a> License</p></article>
-    </section>
-
-
-
-
-
-
+.catch();</code></pre>
+				<hr>
+				<h3 id="jsdocs">JSDocs</h3>
+				<p>You can read further documentation <a href="out/index.html">here.</a></p>
+				<h3 id="activeledger">Activeledger</h3>
+				<p><a href="https://activeledger.io/">Visit Activeledger.io</a> </p>
+				<p><a href="https://github.com/activeledger/activeledger">Read Activeledgers documentation</a></p>
+				<h2 id="license">License</h2>
+				<hr>
+				<p>This project is licensed under the <a href="https://github.com/activeledger/activeledger/blob/master/LICENSE">MIT</a> License</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_connection_.html">"connection"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_enums_.html">"enums"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_interfaces_.html">"interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_key_.html">"key"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_transaction_.html">"transaction"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@activeledger_sdk_lib_connection.html">@activeledger/sdk/lib/connection</a></li><li><a href="module-@activeledger_sdk_lib_enums.html">@activeledger/sdk/lib/enums</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.html">@activeledger/sdk/lib/interfaces</a></li><li><a href="module-@activeledger_sdk_lib_key.html">@activeledger/sdk/lib/key</a></li><li><a href="module-@activeledger_sdk_lib_transaction.html">@activeledger/sdk/lib/transaction</a></li></ul><h3>Classes</h3><ul><li><a href="module-@activeledger_sdk_lib_connection.Connection.html">Connection</a></li><li><a href="module-@activeledger_sdk_lib_key.KeyHandler.html">KeyHandler</a></li><li><a href="module-@activeledger_sdk_lib_transaction.TransactionHandler.html">TransactionHandler</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-@activeledger_sdk_lib_interfaces.IBaseTransaction.html">IBaseTransaction</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.IHttpOptions.html">IHttpOptions</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.IKey.html">IKey</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.ILedgerResponse.html">ILedgerResponse</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.INodeKeyData.html">INodeKeyData</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.IOnboardTx.html">IOnboardTx</a></li><li><a href="module-@activeledger_sdk_lib_interfaces.IOnboardTxBody.html">IOnboardTxBody</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Nov 07 2018 15:45:55 GMT+0000 (GMT Standard Time)
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
 </footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

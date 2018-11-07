@@ -15,7 +15,7 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push public && git push public --tags",
-    "docs": "rm -rf jsdoc && ts2jsdoc && jsdoc .\\jsdoc\\out -d docs --readme ./README.md"
+    "docs": "rm -rf docs && typedoc --out ./docs --readme ./README.md"
   },
   "homepage": "https://activeledger.io",
   "keywords": [
@@ -48,7 +48,6 @@
     "jsdoc": "^3.5.5",
     "prettier": "^1.15.1",
     "ts-jest": "^23.10.4",
-    "ts2jsdoc": "^0.1.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^3.1.6"
