@@ -77,25 +77,32 @@ export class TransactionHandler {
   /**
    * Sign the provided transaction and add it to the body
    *
-   * @param {IBaseTransaction} txBody - The transaction to sign
+   * @param {IBaseTransaction or string} txBody - The transaction to sign
    * @param {IKey} key - The key to use to sign
-   * @returns {Promise<IBaseTransaction>} Returns the transaction with its signature
+   * @returns {Promise<IBaseTransaction or string>} Returns the transaction with its signature, or if a string txBody is provided the signature is returned
    * @memberof TransactionHandler
    */
-  public signTransaction(txBody: IBaseTransaction, key: IKey): Promise<IBaseTransaction> {
+  public signTransaction(txBody: string, key: IKey): Promise<string>;
+  public signTransaction(txBody: IBaseTransaction, key: IKey): Promise<IBaseTransaction>;
+  public signTransaction(txBody: any, key: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         const keyPair = new ActiveCrypto.KeyPair(key.type, (key.key.prv as any).pkcs8pem);
 
-        let identifier = key.name;
+        // Check the transaction type
+        if (typeof txBody === "string") {
+          return resolve(keyPair.sign(txBody));
+        } else {
+          let identifier = key.name;
 
-        if (key.identity) {
-          identifier = key.identity;
+          if (key.identity) {
+            identifier = key.identity;
+          }
+
+          txBody.$sigs[identifier] = keyPair.sign(txBody.$tx);
+
+          return resolve(txBody);
         }
-
-        txBody.$sigs[identifier] = keyPair.sign(txBody.$tx);
-
-        return resolve(txBody);
       } catch (err) {
         return reject(err);
       }
