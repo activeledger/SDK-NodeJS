@@ -18,6 +18,8 @@ This SDK can be used in JavaScript and TypeScript projects.
 ```
 $ npm i -s @activeledger/sdk
 
+
+
 ```
 
 ## Usage
@@ -242,13 +244,12 @@ txHandler
   .catch();
 
 // Sign a string transaction
-const stringTx = tx.toString();
 txHandler
-  .signTransaction(stringTx, key)
+  .signTransaction("Hello world", key)
   .then((signature: string) => {
     // Do something with the signature
   })
-  .cathc();
+  .catch();
 ```
 
 #### Sending a transaction
