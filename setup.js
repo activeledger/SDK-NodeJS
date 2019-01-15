@@ -23,46 +23,46 @@
 
 const fs = require("fs");
 
- afterAll(() => {
+afterAll(() => {
   console.log("Cleaning up test files.");
 
   // Delete basic test file
-  fs.unlink("./test-export.json", (err) => {
+  fs.unlink("./test-export.json", err => {
     if (err) {
       console.log(err);
     }
   });
 
   // Delete custom name file
-  fs.unlink("./export-name-test.json", (err) => {
+  fs.unlink("./export-name-test.json", err => {
     if (err) {
       console.log(err);
     }
   });
 
   // Delete overwrite file
-  fs.unlink("./overwrite-me.json", (err) => {
+  fs.unlink("./overwrite-me.json", err => {
     if (err) {
       console.log(err);
     }
   });
 
   // Delete create dir test folders and file
-  fs.unlink("./export/test/test-export.json", (err) => {
+  fs.unlink("./export/test/test-export.json", err => {
     if (err) {
       console.log(err);
     }
 
-    fs.rmdir("./export/test", (err) => {
+    fs.rmdir("./export/test", err => {
       if (err) {
         console.log(err);
       }
 
-      fs.rmdir("./export", (err) => {
+      fs.rmdir("./export", err => {
         if (err) {
           console.log(err);
         }
       });
     });
   });
- });
+});

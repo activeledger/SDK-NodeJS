@@ -24,24 +24,29 @@ test("Create a namespace transaction", async () => {
   key.identity = "";
 
   const res = await keyHandler.onboardKey(key, connection);
-  
-  const txHandler = new TransactionHandler();
-  const tx: IBaseTransaction = {
-    $sigs: {},
-    $tx: {
-      $contract: "namespace",
-      $i: {},
-      $namespace: "default",
-    },
-  };
 
-  tx.$tx.$i[key.identity] = {
-    namespace: "test" + new Date().getTime(),
-  };
+  if (res.$streams.new[0]) {
+    key.identity = res.$streams.new[0].id;
 
-  const txBody: IBaseTransaction = await txHandler.signTransaction(tx, key);
-  const resp: any = await txHandler.sendTransaction(txBody, connection)
-  
-  expect(resp.$streams.updated).not.toBeUndefined();
+    const txHandler = new TransactionHandler();
+    const tx: IBaseTransaction = {
+      $sigs: {},
+      $tx: {
+        $contract: "namespace",
+        $i: {},
+        $namespace: "default",
+      },
+    };
 
-}, 30000); 
+    tx.$tx.$i[key.identity] = {
+      namespace: "test" + new Date().getTime(),
+    };
+
+    const txBody: IBaseTransaction = await txHandler.signTransaction(tx, key);
+    const resp: any = await txHandler.sendTransaction(txBody, connection);
+
+    expect(resp.$streams.updated).not.toBeUndefined();
+  } else {
+    throw new Error("Onboarding problem");
+  }
+}, 30000);

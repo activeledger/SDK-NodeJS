@@ -272,9 +272,9 @@ txHandler
 
 ---
 
-### JSDocs
+### Further Documentation
 
-You can read further documentation [here.](out/index.html)
+You can read further documentation [here.](https://activeledger.github.io/SDK-NodeJS/)
 
 ### Activeledger
 
