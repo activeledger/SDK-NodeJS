@@ -1,6 +1,6 @@
 /*
  * MIT License (MIT)
- * Copyright (c) 2018 Activeledger
+ * Copyright (c) 2019 Activeledger
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-import { ActiveCrypto } from '@activeledger/activecrypto';
+import { ActiveCrypto } from "@activeledger/activecrypto";
 
-// Key Interfaces
+// #region Key Interfaces
 
 export interface IKey {
   identity?: string;
@@ -32,9 +32,17 @@ export interface IKey {
   name: string;
 }
 
-// Transaction Interfaces
+export interface IKeyExportOptions {
+  location: string;
+  createDir?: boolean;
+  overwrite?: boolean;
+  name?: string;
+}
+// #endregion
 
-export interface IOnboardTx extends IBaseTransaction{
+// #region Transaction Interfaces
+
+export interface IOnboardTx extends IBaseTransaction {
   $selfsign: boolean;
   $sigs: any;
   $tx: IOnboardTxBody;
@@ -46,7 +54,28 @@ export interface IOnboardTxBody {
   $namespace: string;
 }
 
-// Connection Interfaces 
+export interface IBaseTransaction {
+  $selfsign?: boolean;
+  $sigs: any;
+  $tx: ITxBody;
+}
+
+interface ITxBody {
+  $entry?: string;
+  $contract: string;
+  $namespace: string;
+  $i: any;
+  $o?: any;
+  $r?: any;
+}
+
+export interface IOnboardKeyTxOptions {
+  contract?: string;
+  namespace?: string;
+}
+// #endregion
+
+// #region Connection Interfaces
 
 export interface INodeKeyData {
   encryption: string;
@@ -61,8 +90,9 @@ export interface IHttpOptions {
   path?: string;
   port: number;
 }
+// #endregion
 
-// Ledger response interfaces
+// #region Ledger response interfaces
 
 export interface ILedgerResponse {
   $umid: string;
@@ -90,20 +120,4 @@ interface IUpdatedObject {
   id: string;
   name: string;
 }
-
-// Transaction Interfaces
-
-export interface IBaseTransaction {
-  $selfsign?: boolean;
-  $sigs: any;
-  $tx: ITxBody;
-}
-
-interface ITxBody {
-  $entry?: string;
-  $contract: string;
-  $namespace: string;
-  $i: any;
-  $o?: any;
-  $r?: any;
-}
+// #endregion

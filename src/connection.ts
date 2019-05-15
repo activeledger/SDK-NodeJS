@@ -1,6 +1,6 @@
 /*
  * MIT License (MIT)
- * Copyright (c) 2018 Activeledger
+ * Copyright (c) 2019 Activeledger
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import Axios, { AxiosResponse } from "axios";
-import { IBaseTransaction, IHttpOptions, ILedgerResponse, INodeKeyData } from './interfaces';
+import { IBaseTransaction, IHttpOptions, ILedgerResponse, INodeKeyData } from "./interfaces";
 
 export class Connection {
   private protocol: string;
@@ -115,17 +115,15 @@ export class Connection {
    */
   private postTransaction(tx: string | IBaseTransaction): Promise<ILedgerResponse> {
     return new Promise((resolve, reject) => {
-      
       this.httpOptions.data = tx;
 
       Axios(this.httpOptions)
-      .then((resp: AxiosResponse) => {
-        resolve(resp.data as ILedgerResponse);
-      })
-      .catch((err: any) => {
-        reject(err);
-      });
-      
+        .then((resp: AxiosResponse) => {
+          resolve(resp.data as ILedgerResponse);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
   }
 
@@ -166,20 +164,19 @@ export class Connection {
       const url = `${this.protocol}://${this.address}:${this.port}/a/status`;
 
       Axios.get(url)
-      .then((resp: AxiosResponse) => {
-        const jsonData = resp.data;
+        .then((resp: AxiosResponse) => {
+          const jsonData = resp.data;
 
-        const nodeKey: INodeKeyData = {
-          encryption: "rsa",
-          pem: Buffer.from(jsonData.pem, "base64").toString(),
-        };
+          const nodeKey: INodeKeyData = {
+            encryption: "rsa",
+            pem: Buffer.from(jsonData.pem, "base64").toString(),
+          };
 
-        resolve(nodeKey);
-      })
-      .catch((err: any) => {
-        reject(err);
-      });
-
+          resolve(nodeKey);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
   }
 }

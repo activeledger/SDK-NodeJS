@@ -1,6 +1,6 @@
 /*
  * MIT License (MIT)
- * Copyright (c) 2018 Activeledger
+ * Copyright (c) 2019 Activeledger
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import { ActiveCrypto } from "@activeledger/activecrypto";
 import * as fs from "fs";
 import { Connection } from "./connection";
 import { KeyType } from "./enums";
-import { IKey, ILedgerResponse, IOnboardTx } from "./interfaces";
+import { IKey, IKeyExportOptions, ILedgerResponse, IOnboardTx } from "./interfaces";
 import { TransactionHandler } from "./transaction";
 
 export class KeyHandler {
@@ -94,6 +94,15 @@ export class KeyHandler {
    * Export a key to a file
    *
    * @param {IKey} key - The key to export
+   * @param {IKeyExportOptions} options - The configuration options for the export
+   * @returns {Promise<void>}
+   * @memberof KeyHandler
+   */
+  public exportKey(key: IKey, options: IKeyExportOptions): Promise<void>;
+  /**
+   *
+   *
+   * @param {IKey} key
    * @param {string} location - The location to save the key to
    * @param {boolean} [createDir] - (Optional) Create the directory structure
    * @param {boolean} [overwrite] - (Optional) Overwrite an existing file if it exists
@@ -101,40 +110,52 @@ export class KeyHandler {
    * @returns {Promise<void>}
    * @memberof KeyHandler
    */
+  public exportKey(key: IKey, location: string, createDir?: boolean, overwrite?: boolean, name?: string): Promise<void>;
   public exportKey(
     key: IKey,
-    location: string,
+    locationOrOptions: string | IKeyExportOptions,
     createDir?: boolean,
     overwrite?: boolean,
     name?: string,
   ): Promise<void> {
     return new Promise(async (resolve, reject) => {
+      const setOptions = (): IKeyExportOptions => {
+        return {
+          createDir: createDir ? true : false,
+          location: locationOrOptions as string,
+          name,
+          overwrite: overwrite ? true : false,
+        };
+      };
+
+      const options: IKeyExportOptions =
+        typeof locationOrOptions === "string" ? setOptions() : (locationOrOptions as IKeyExportOptions);
 
       // Recursively create dir
-      if (createDir) {
+      if (options.createDir) {
         try {
-          fs.mkdirSync(location, {recursive: true});
+          fs.mkdirSync(options.location, { recursive: true });
         } catch (err) {
           reject(err);
         }
       }
 
       // Strip trailing /
-      location = this.stripTrailing(location);
+      options.location = this.stripTrailing(options.location);
 
       // Set name of file
-      let path = `${location}/${key.name}.json`;
-      if (name) {
-        path = `${location}/${name}.json`;
+      let path = `${options.location}/${key.name}.json`;
+      if (options.name) {
+        path = `${options.location}/${options.name}.json`;
       }
 
       // Check folder exists
-      const dirExists = fs.existsSync(location);
+      const dirExists = fs.existsSync(options.location);
       if (dirExists) {
         // Check if the file exists
         const fileExists = fs.existsSync(path);
         // If exists and overwrite is false
-        if (fileExists && !overwrite) {
+        if (fileExists && !options.overwrite) {
           reject("File already exists, set overwrite to true or use a different name");
         } else {
           // Write
@@ -190,11 +211,10 @@ export class KeyHandler {
    * @memberof KeyHandler
    */
   private stripTrailing(path: string): string {
-    const lastChar = path.slice(path.length-1, path.length);
+    const lastChar = path.slice(path.length - 1, path.length);
     if (lastChar === "/") {
-      return path.slice(0, path.length-1);
-    } 
+      return path.slice(0, path.length - 1);
+    }
     return path;
   }
-
 }

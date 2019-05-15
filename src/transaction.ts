@@ -1,6 +1,6 @@
 /*
  * MIT License (MIT)
- * Copyright (c) 2018 Activeledger
+ * Copyright (c) 2019 Activeledger
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import { Connection } from "./connection";
-import { IBaseTransaction, IKey, ILedgerResponse, IOnboardTx } from "./interfaces";
+import { IBaseTransaction, IKey, ILedgerResponse, IOnboardKeyTxOptions, IOnboardTx } from "./interfaces";
 
 export class TransactionHandler {
   private contract = "onboard";
@@ -39,52 +39,51 @@ export class TransactionHandler {
    * @returns {Promise<IOnboardTx>} Returns the built transaction
    * @memberof Transaction
    */
-  public buildOnboardKeyTx(key: IKey, contract?: string, namespace?: string): Promise<IOnboardTx> {
-    if (contract) {
-      this.contract = contract;
+  public buildOnboardKeyTx(key: IKey, options?: IOnboardKeyTxOptions): Promise<IOnboardTx> {
+    // If options not provided use the default values
+    if (options) {
+      if (options.contract) {
+        this.contract = options.contract;
+      }
+
+      if (options.namespace) {
+        this.namespace = options.namespace;
+      }
     }
 
-    if (namespace) {
-      this.namespace = namespace;
-    }
+    // Build the transaction
+    const tx: IOnboardTx = {
+      $selfsign: true,
+      $sigs: {},
+      $tx: {
+        $contract: this.contract,
+        $i: {},
+        $namespace: this.namespace,
+      },
+    };
 
-    return new Promise((resolve, reject) => {
-      const tx: IOnboardTx = {
-        $selfsign: true,
-        $sigs: {},
-        $tx: {
-          $contract: this.contract,
-          $i: {},
-          $namespace: this.namespace,
-        },
-      };
+    // Set the key data
+    tx.$tx.$i[key.name] = {
+      publicKey: (key.key.pub as any).pkcs8pem,
+      type: key.type,
+    };
 
-      tx.$tx.$i[key.name] = {
-        publicKey: (key.key.pub as any).pkcs8pem,
-        type: key.type,
-      };
-
-      this.signTransaction(tx, key)
-        .then((txBody: IBaseTransaction) => {
-          resolve(txBody as IOnboardTx);
-        })
-        .catch((err: any) => {
-          reject(err);
-        });
-    });
+    // Return the signTransaction promise
+    return this.signTransaction<IOnboardTx>(tx, key);
   }
 
   /**
    * Sign the provided transaction and add it to the body
    *
-   * @param {IBaseTransaction or string} txBody - The transaction to sign
+   * @template T extends IBaseTransaction
+   * @param {(T | string)} txBody - The transaction to sign
    * @param {IKey} key - The key to use to sign
-   * @returns {Promise<IBaseTransaction or string>} Returns the transaction with its signature, or if a string txBody is provided the signature is returned
+   * @returns {(Promise<T | string>)} Returns the transaction with its signature, or if a string txBody is provided the signature is returned
    * @memberof TransactionHandler
    */
   public signTransaction(txBody: string, key: IKey): Promise<string>;
-  public signTransaction(txBody: IBaseTransaction, key: IKey): Promise<IBaseTransaction>;
-  public signTransaction(txBody: any, key: any): Promise<any> {
+  public signTransaction<T extends IBaseTransaction>(txBody: T, key: IKey): Promise<T>;
+  public signTransaction<T extends IBaseTransaction>(txBody: T | string, key: IKey): Promise<T | string> {
     return new Promise((resolve, reject) => {
       try {
         const keyPair = new ActiveCrypto.KeyPair(key.type, (key.key.prv as any).pkcs8pem);
@@ -112,21 +111,12 @@ export class TransactionHandler {
   /**
    * Send a transaction to the ledger
    *
-   * @param {(IBaseTransaction | IOnboardTx)} tx - The transaction to send
+   * @param {(T extends IBaseTransaction)} tx - The transaction to send
    * @param {Connection} connection - The connection to send the transaction over
    * @returns {Promise<ILedgerResponse>} Returns the ledger response
    * @memberof Transaction
    */
-  public sendTransaction(tx: IBaseTransaction | IOnboardTx, connection: Connection): Promise<ILedgerResponse> {
-    return new Promise((resolve, reject) => {
-      connection
-        .sendTransaction(tx)
-        .then((response: ILedgerResponse) => {
-          resolve(response);
-        })
-        .catch((err: any) => {
-          reject(err);
-        });
-    });
+  public sendTransaction<T extends IBaseTransaction>(tx: T, connection: Connection): Promise<ILedgerResponse> {
+    return connection.sendTransaction(tx);
   }
 }
