@@ -22,6 +22,6 @@
  */
 
 export enum KeyType {
-  EllipticCurve,
-  RSA,
+  EllipticCurve = "secp256k1",
+  RSA = "rsa",
 }

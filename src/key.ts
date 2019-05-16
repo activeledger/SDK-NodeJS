@@ -38,30 +38,17 @@ export class KeyHandler {
    * @memberof KeyHandler
    */
   public generateKey(keyName: string, keyType: KeyType): Promise<IKey> {
-    let internalType: string;
-
     return new Promise((resolve, reject) => {
-      switch (keyType) {
-        case KeyType.EllipticCurve:
-          internalType = "secp256k1";
-          break;
-
-        case KeyType.RSA:
-        default:
-          internalType = "rsa";
-          break;
-      }
-
       try {
         const keyHolder: IKey = {
-          key: new ActiveCrypto.KeyPair(internalType).generate(),
+          key: new ActiveCrypto.KeyPair(keyType).generate(),
           name: keyName,
-          type: internalType,
+          type: keyType,
         };
 
         return resolve(keyHolder);
-      } catch (e) {
-        return reject(e);
+      } catch (error) {
+        return reject(error);
       }
     });
   }
@@ -76,17 +63,20 @@ export class KeyHandler {
    */
   public onboardKey(key: IKey, connection: Connection): Promise<ILedgerResponse> {
     return new Promise((resolve, reject) => {
-      const tx = new TransactionHandler();
-      tx.buildOnboardKeyTx(key).then((txBody: IOnboardTx) => {
-        tx.sendTransaction(txBody, connection)
-          .then((response: ILedgerResponse) => {
-            key.identity = response.$streams.new[0].id;
-            resolve(response);
-          })
-          .catch((err: any) => {
-            reject(err);
-          });
-      });
+      const txHandler = new TransactionHandler();
+
+      txHandler
+        .buildOnboardKeyTx(key)
+        .then((txBody: IOnboardTx) => {
+          return txHandler.sendTransaction(txBody, connection);
+        })
+        .then((response: ILedgerResponse) => {
+          key.identity = response.$streams.new[0].id;
+          resolve(response);
+        })
+        .catch((error: Error) => {
+          reject(error);
+        });
     });
   }
 
@@ -119,6 +109,11 @@ export class KeyHandler {
     name?: string,
   ): Promise<void> {
     return new Promise(async (resolve, reject) => {
+      /**
+       * Internal function to handle overload and setup
+       *
+       * @returns {IKeyExportOptions}
+       */
       const setOptions = (): IKeyExportOptions => {
         return {
           createDir: createDir ? true : false,
@@ -144,10 +139,7 @@ export class KeyHandler {
       options.location = this.stripTrailing(options.location);
 
       // Set name of file
-      let path = `${options.location}/${key.name}.json`;
-      if (options.name) {
-        path = `${options.location}/${options.name}.json`;
-      }
+      const path = options.name ? `${options.location}/${options.name}.json` : `${options.location}/${key.name}.json`;
 
       // Check folder exists
       const dirExists = fs.existsSync(options.location);

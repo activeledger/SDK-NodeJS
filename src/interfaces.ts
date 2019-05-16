@@ -42,6 +42,18 @@ export interface IKeyExportOptions {
 
 // #region Transaction Interfaces
 
+export interface ILabelledTransactionData {
+  key: IKey;
+  namespace: string;
+  contract: string;
+  inputLabel: string;
+  inputData: {};
+  entry?: string;
+  outputs?: {};
+  readonly?: {};
+  selfsign?: boolean;
+}
+
 export interface IOnboardTx extends IBaseTransaction {
   $selfsign: boolean;
   $sigs: any;
@@ -88,7 +100,14 @@ export interface IHttpOptions {
   headers?: any;
   method: string;
   path?: string;
-  port: number;
+  port: number | string;
+}
+
+export interface IConnectionDataOptions {
+  protocol: string;
+  address: string;
+  portNumber: number | string;
+  encrypt?: boolean;
 }
 // #endregion
 

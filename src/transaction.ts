@@ -23,10 +23,36 @@
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import { Connection } from "./connection";
-import { IBaseTransaction, IKey, ILedgerResponse, IOnboardKeyTxOptions, IOnboardTx } from "./interfaces";
+import {
+  IBaseTransaction,
+  IKey,
+  ILabelledTransactionData,
+  ILedgerResponse,
+  IOnboardKeyTxOptions,
+  IOnboardTx,
+} from "./interfaces";
 
+/**
+ * Handles building, signing, and sending of transactions
+ *
+ * @export
+ * @class TransactionHandler
+ */
 export class TransactionHandler {
+  /**
+   * The contract name
+   *
+   * @private
+   * @memberof TransactionHandler
+   */
   private contract = "onboard";
+
+  /**
+   * The namespace the contract is stored in
+   *
+   * @private
+   * @memberof TransactionHandler
+   */
   private namespace = "default";
 
   /**
@@ -70,6 +96,102 @@ export class TransactionHandler {
 
     // Return the signTransaction promise
     return this.signTransaction<IOnboardTx>(tx, key);
+  }
+
+  /**
+   *
+   *
+   * @param {ILabelledTransactionData} options
+   * @returns {Promise<IBaseTransaction>}
+   * @memberof TransactionHandler
+   */
+  public labelledTransaction(options: ILabelledTransactionData): Promise<IBaseTransaction>;
+  /**
+   *
+   *
+   * @param {IKey} key
+   * @param {string} namespace
+   * @param {string} contract
+   * @param {string} inputLabel
+   * @param {{}} inputData
+   * @param {string} [entry]
+   * @param {{}} [outputs]
+   * @param {{}} [readonly]
+   * @param {boolean} [selfsign]
+   * @returns {Promise<IBaseTransaction>}
+   * @memberof TransactionHandler
+   */
+  public labelledTransaction(
+    key: IKey,
+    namespace: string,
+    contract: string,
+    inputLabel: string,
+    inputData: {},
+    entry?: string,
+    outputs?: {},
+    readonly?: {},
+    selfsign?: boolean,
+  ): Promise<IBaseTransaction>;
+  public labelledTransaction(
+    keyOrOptions: IKey | ILabelledTransactionData,
+    namespace?: string,
+    contract?: string,
+    inputLabel?: string,
+    inputData?: {},
+    entry?: string,
+    outputs?: {},
+    readonly?: {},
+    selfsign?: boolean,
+  ): Promise<IBaseTransaction> {
+    const generateOptions = (): ILabelledTransactionData => {
+      return {
+        contract: contract as string,
+        entry: entry ? entry : undefined,
+        inputData: inputData as {},
+        inputLabel: inputLabel as string,
+        key: keyOrOptions as IKey,
+        namespace: namespace as string,
+        outputs: outputs ? outputs : undefined,
+        readonly: readonly ? readonly : undefined,
+        selfsign: selfsign ? selfsign : undefined,
+      };
+    };
+
+    // If key or options is a key (has .type field)
+    const options: ILabelledTransactionData = (keyOrOptions as IKey).type
+      ? generateOptions()
+      : (keyOrOptions as ILabelledTransactionData);
+
+    const tx: IBaseTransaction = {
+      $sigs: {},
+      $tx: {
+        $contract: options.contract,
+        $i: {
+          [options.inputLabel]: Object.assign(options.inputData, {
+            $stream: options.key.identity,
+          }),
+        },
+        $namespace: options.namespace,
+      },
+    };
+
+    if (options.entry) {
+      tx.$tx.$entry = options.entry;
+    }
+
+    if (options.outputs) {
+      tx.$tx.$o = options.outputs;
+    }
+
+    if (options.readonly) {
+      tx.$tx.$r = options.readonly;
+    }
+
+    if (options.selfsign) {
+      tx.$selfsign = options.selfsign;
+    }
+
+    return this.signTransaction<IBaseTransaction>(tx, options.key);
   }
 
   /**

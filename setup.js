@@ -24,45 +24,25 @@
 const fs = require("fs");
 
 afterAll(() => {
-  console.log("Cleaning up test files.");
-
   // Delete basic test file
-  fs.unlink("./test-export.json", err => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  if (fs.existsSync("./test-export.json")) {
+    fs.unlinkSync("./test-export.json");
+  }
 
   // Delete custom name file
-  fs.unlink("./export-name-test.json", err => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  if (fs.existsSync("./export-name-test.json")) {
+    fs.unlinkSync("./export-name-test.json");
+  }
 
   // Delete overwrite file
-  fs.unlink("./overwrite-me.json", err => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  if (fs.existsSync("./overwrite-me.json")) {
+    fs.unlinkSync("./overwrite-me.json");
+  }
 
   // Delete create dir test folders and file
-  fs.unlink("./export/test/test-export.json", err => {
-    if (err) {
-      console.log(err);
-    }
-
-    fs.rmdir("./export/test", err => {
-      if (err) {
-        console.log(err);
-      }
-
-      fs.rmdir("./export", err => {
-        if (err) {
-          console.log(err);
-        }
-      });
-    });
-  });
+  if (fs.existsSync("./export")) {
+    fs.unlinkSync("./export/test/test-export.json");
+    fs.rmdirSync("./export/test");
+    fs.rmdirSync("./export");
+  }
 });
