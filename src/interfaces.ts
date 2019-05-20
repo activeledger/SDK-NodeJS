@@ -42,7 +42,22 @@ export interface IKeyExportOptions {
 
 // #region Transaction Interfaces
 
-export interface ILabelledTransactionData {
+interface ILabelledTransactionInputData {
+  $stream: string;
+}
+
+interface ILabelledTransactionInput {
+  [inputLabel: string]: ILabelledTransactionInputData;
+}
+
+interface ILabelledTransactionBody extends ITxBody {
+  $i: ILabelledTransactionInput;
+}
+
+export interface ILabelledTransaction extends IBaseTransaction {
+  $tx: ILabelledTransactionBody;
+}
+export interface ILabelledTransactionOptions {
   key: IKey;
   namespace: string;
   contract: string;

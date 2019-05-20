@@ -1,6 +1,6 @@
 import { Connection } from "../connection";
 import { KeyType } from "../enums";
-import { IBaseTransaction, IKey } from "../interfaces";
+import { IBaseTransaction, IKey, ILabelledTransaction, ILabelledTransactionOptions } from "../interfaces";
 import { KeyHandler } from "../key";
 import { TransactionHandler } from "../transaction";
 
@@ -48,5 +48,35 @@ test("Create a namespace transaction", async () => {
     expect(resp.$streams.updated).not.toBeUndefined();
   } else {
     throw new Error("Onboarding problem");
+  }
+}, 30000);
+
+test("Create a labelled transaction", async () => {
+  const keyHandler = new KeyHandler();
+  const connection = new Connection("http", "localhost", 5260);
+  const key: IKey = await keyHandler.generateKey("test-labelled", KeyType.EllipticCurve);
+  key.identity = "";
+
+  const res = await keyHandler.onboardKey(key, connection);
+
+  if (res.$streams.new[0]) {
+    key.identity = res.$streams.new[0].id;
+
+    const txHandler = new TransactionHandler();
+
+    const labelOptions: ILabelledTransactionOptions = {
+      contract: "namespace",
+      inputData: { namespace: "labelled-tx-test" + new Date().getTime() },
+      inputLabel: "Test input label",
+      key,
+      namespace: "default",
+    };
+
+    const signedTx = await txHandler.labelledTransaction(labelOptions);
+    const resp = await txHandler.sendTransaction(signedTx, connection);
+
+    expect(resp.$streams.updated).not.toBeUndefined();
+  } else {
+    throw new Error("Labelled TX problem");
   }
 }, 30000);

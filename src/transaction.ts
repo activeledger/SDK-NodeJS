@@ -23,10 +23,11 @@
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import { Connection } from "./connection";
+import { ILabelledTransaction } from "./interfaces";
 import {
   IBaseTransaction,
   IKey,
-  ILabelledTransactionData,
+  ILabelledTransactionOptions,
   ILedgerResponse,
   IOnboardKeyTxOptions,
   IOnboardTx,
@@ -101,11 +102,11 @@ export class TransactionHandler {
   /**
    *
    *
-   * @param {ILabelledTransactionData} options
+   * @param {ILabelledTransactionOptions} options
    * @returns {Promise<IBaseTransaction>}
    * @memberof TransactionHandler
    */
-  public labelledTransaction(options: ILabelledTransactionData): Promise<IBaseTransaction>;
+  public labelledTransaction(options: ILabelledTransactionOptions): Promise<IBaseTransaction>;
   /**
    *
    *
@@ -118,7 +119,7 @@ export class TransactionHandler {
    * @param {{}} [outputs]
    * @param {{}} [readonly]
    * @param {boolean} [selfsign]
-   * @returns {Promise<IBaseTransaction>}
+   * @returns {Promise<ILabelledTransaction>}
    * @memberof TransactionHandler
    */
   public labelledTransaction(
@@ -131,9 +132,9 @@ export class TransactionHandler {
     outputs?: {},
     readonly?: {},
     selfsign?: boolean,
-  ): Promise<IBaseTransaction>;
+  ): Promise<ILabelledTransaction>;
   public labelledTransaction(
-    keyOrOptions: IKey | ILabelledTransactionData,
+    keyOrOptions: IKey | ILabelledTransactionOptions,
     namespace?: string,
     contract?: string,
     inputLabel?: string,
@@ -142,8 +143,8 @@ export class TransactionHandler {
     outputs?: {},
     readonly?: {},
     selfsign?: boolean,
-  ): Promise<IBaseTransaction> {
-    const generateOptions = (): ILabelledTransactionData => {
+  ): Promise<ILabelledTransaction> {
+    const generateOptions = (): ILabelledTransactionOptions => {
       return {
         contract: contract as string,
         entry: entry ? entry : undefined,
@@ -158,40 +159,42 @@ export class TransactionHandler {
     };
 
     // If key or options is a key (has .type field)
-    const options: ILabelledTransactionData = (keyOrOptions as IKey).type
+    const options: ILabelledTransactionOptions = (keyOrOptions as IKey).type
       ? generateOptions()
-      : (keyOrOptions as ILabelledTransactionData);
+      : (keyOrOptions as ILabelledTransactionOptions);
 
-    const tx: IBaseTransaction = {
-      $sigs: {},
-      $tx: {
-        $contract: options.contract,
-        $i: {
-          [options.inputLabel]: Object.assign(options.inputData, {
-            $stream: options.key.identity,
-          }),
+    if (options.key.identity) {
+      const tx: ILabelledTransaction = {
+        $sigs: {},
+        $tx: {
+          $contract: options.contract,
+          $i: {
+            [options.inputLabel]: { ...options.inputData, $stream: options.key.identity },
+          },
+          $namespace: options.namespace,
         },
-        $namespace: options.namespace,
-      },
-    };
+      };
 
-    if (options.entry) {
-      tx.$tx.$entry = options.entry;
+      if (options.entry) {
+        tx.$tx.$entry = options.entry;
+      }
+
+      if (options.outputs) {
+        tx.$tx.$o = options.outputs;
+      }
+
+      if (options.readonly) {
+        tx.$tx.$r = options.readonly;
+      }
+
+      if (options.selfsign) {
+        tx.$selfsign = options.selfsign;
+      }
+
+      return this.signTransaction<ILabelledTransaction>(tx, options.key);
+    } else {
+      return Promise.reject(new Error("Key must have an identity."));
     }
-
-    if (options.outputs) {
-      tx.$tx.$o = options.outputs;
-    }
-
-    if (options.readonly) {
-      tx.$tx.$r = options.readonly;
-    }
-
-    if (options.selfsign) {
-      tx.$selfsign = options.selfsign;
-    }
-
-    return this.signTransaction<IBaseTransaction>(tx, options.key);
   }
 
   /**
