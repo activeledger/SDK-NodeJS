@@ -12,10 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - This changelog
+- Added labelled transaction builder function, with interface
+- Browser check before running code reliant on fs
 
 ### Changed
 
 - Test updates
+- Refactored code
 
 ### Removed
 
