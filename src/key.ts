@@ -22,7 +22,6 @@
  */
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
-import * as fs from "fs";
 import { Connection } from "./connection";
 import { KeyType } from "./enums";
 import { IKey, IKeyExportOptions, ILedgerResponse, IOnboardTx } from "./interfaces";
@@ -109,58 +108,69 @@ export class KeyHandler {
     name?: string,
   ): Promise<void> {
     return new Promise(async (resolve, reject) => {
-      /**
-       * Internal function to handle overload and setup
-       *
-       * @returns {IKeyExportOptions}
-       */
-      const setOptions = (): IKeyExportOptions => {
-        return {
-          createDir: createDir ? true : false,
-          location: locationOrOptions as string,
-          name,
-          overwrite: overwrite ? true : false,
-        };
-      };
-
-      const options: IKeyExportOptions =
-        typeof locationOrOptions === "string" ? setOptions() : (locationOrOptions as IKeyExportOptions);
-
-      // Recursively create dir
-      if (options.createDir) {
+      const jsEnv = require("browser-or-node");
+      if (!jsEnv.isBrowser) {
+        let fs: any;
         try {
-          fs.mkdirSync(options.location, { recursive: true });
-        } catch (err) {
-          reject(err);
+          fs = require("fs");
+        } catch (error) {
+          return reject(error);
         }
-      }
+        /**
+         * Internal function to handle overload and setup
+         *
+         * @returns {IKeyExportOptions}
+         */
+        const setOptions = (): IKeyExportOptions => {
+          return {
+            createDir: createDir ? true : false,
+            location: locationOrOptions as string,
+            name,
+            overwrite: overwrite ? true : false,
+          };
+        };
 
-      // Strip trailing /
-      options.location = this.stripTrailing(options.location);
+        const options: IKeyExportOptions =
+          typeof locationOrOptions === "string" ? setOptions() : (locationOrOptions as IKeyExportOptions);
 
-      // Set name of file
-      const path = options.name ? `${options.location}/${options.name}.json` : `${options.location}/${key.name}.json`;
+        // Recursively create dir
+        if (options.createDir) {
+          try {
+            fs.mkdirSync(options.location, { recursive: true });
+          } catch (err) {
+            reject(err);
+          }
+        }
 
-      // Check folder exists
-      const dirExists = fs.existsSync(options.location);
-      if (dirExists) {
-        // Check if the file exists
-        const fileExists = fs.existsSync(path);
-        // If exists and overwrite is false
-        if (fileExists && !options.overwrite) {
-          reject("File already exists, set overwrite to true or use a different name");
+        // Strip trailing /
+        options.location = this.stripTrailing(options.location);
+
+        // Set name of file
+        const path = options.name ? `${options.location}/${options.name}.json` : `${options.location}/${key.name}.json`;
+
+        // Check folder exists
+        const dirExists = fs.existsSync(options.location);
+        if (dirExists) {
+          // Check if the file exists
+          const fileExists = fs.existsSync(path);
+          // If exists and overwrite is false
+          if (fileExists && !options.overwrite) {
+            reject("File already exists, set overwrite to true or use a different name");
+          } else {
+            // Write
+            fs.writeFile(path, JSON.stringify(key), (error: Error) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve();
+              }
+            });
+          }
         } else {
-          // Write
-          fs.writeFile(path, JSON.stringify(key), err => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve();
-            }
-          });
+          reject("Unable to find location");
         }
       } else {
-        reject("Unable to find location");
+        reject(new Error("Browser detected - FS usage restricted"));
       }
     });
   }
@@ -174,23 +184,35 @@ export class KeyHandler {
    */
   public importKey(path: string): Promise<IKey> {
     return new Promise((resolve, reject) => {
-      // Check if the file exists
-      fs.exists(path, (fileExists: boolean) => {
-        // If exists and overwrite is false
-        if (fileExists) {
-          // read
-          fs.readFile(path, (err, buffer) => {
-            if (err) {
-              reject(err);
-            } else {
-              const data = buffer.toString();
-              resolve(JSON.parse(data) as IKey);
-            }
-          });
-        } else {
-          reject("File already exists, set overwrite to true or use a different name");
+      const jsEnv = require("browser-or-node");
+      if (!jsEnv.isBrowser) {
+        let fs: any;
+        try {
+          fs = require("fs");
+        } catch (error) {
+          return reject(error);
         }
-      });
+
+        // Check if the file exists
+        fs.exists(path, (fileExists: boolean) => {
+          // If exists and overwrite is false
+          if (fileExists) {
+            // read
+            fs.readFile(path, (error: Error, buffer: Buffer) => {
+              if (error) {
+                reject(error);
+              } else {
+                const data = buffer.toString();
+                resolve(JSON.parse(data) as IKey);
+              }
+            });
+          } else {
+            reject("File already exists, set overwrite to true or use a different name");
+          }
+        });
+      } else {
+        reject(new Error("Browser detected - FS usage restricted"));
+      }
     });
   }
 

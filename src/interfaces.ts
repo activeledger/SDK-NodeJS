@@ -67,6 +67,7 @@ export interface ILabelledTransactionOptions {
   outputs?: {};
   readonly?: {};
   selfsign?: boolean;
+  stream: string;
 }
 
 export interface IOnboardTx extends IBaseTransaction {

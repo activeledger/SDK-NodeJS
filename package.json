@@ -1,6 +1,6 @@
 {
   "name": "@activeledger/sdk",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "NodeJS package for use when integrating with Activeledger",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -55,7 +55,8 @@
   },
   "dependencies": {
     "@activeledger/activecrypto": "^2.0.0-rc.8.0.62",
-    "node-rsa": "1.0.5",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "browser-or-node": "^1.2.1",
+    "node-rsa": "1.0.5"
   }
 }

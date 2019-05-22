@@ -128,6 +128,7 @@ export class TransactionHandler {
     contract: string,
     inputLabel: string,
     inputData: {},
+    stream: string,
     entry?: string,
     outputs?: {},
     readonly?: {},
@@ -139,6 +140,7 @@ export class TransactionHandler {
     contract?: string,
     inputLabel?: string,
     inputData?: {},
+    stream?: string,
     entry?: string,
     outputs?: {},
     readonly?: {},
@@ -155,6 +157,7 @@ export class TransactionHandler {
         outputs: outputs ? outputs : undefined,
         readonly: readonly ? readonly : undefined,
         selfsign: selfsign ? selfsign : undefined,
+        stream: stream as string,
       };
     };
 
@@ -169,7 +172,7 @@ export class TransactionHandler {
         $tx: {
           $contract: options.contract,
           $i: {
-            [options.inputLabel]: { ...options.inputData, $stream: options.key.identity },
+            [options.inputLabel]: { ...options.inputData, $stream: options.stream },
           },
           $namespace: options.namespace,
         },
