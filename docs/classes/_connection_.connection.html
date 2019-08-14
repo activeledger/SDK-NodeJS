@@ -69,6 +69,20 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Handles connecting to the ledger, sending encrypted and non-encrypted transactions</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>Connection</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -90,11 +104,8 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#address" class="tsd-kind-icon">address</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#encrypttx" class="tsd-kind-icon">encrypt<wbr>Tx</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#httpoptions" class="tsd-kind-icon">http<wbr>Options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#port" class="tsd-kind-icon">port</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#protocol" class="tsd-kind-icon">protocol</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#options" class="tsd-kind-icon">options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -106,12 +117,6 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_connection_.connection.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Object literals</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-private"><a href="_connection_.connection.html#encryptedheaders" class="tsd-kind-icon">encrypted<wbr>Headers</a></li>
-							</ul>
-						</section>
 					</div>
 				</section>
 			</section>
@@ -121,13 +126,38 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Connection<span class="tsd-signature-symbol">(</span>protocol<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, portNumber<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, encrypt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_connection_.connection.html" class="tsd-signature-type">Connection</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Connection<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.iconnectiondataoptions.html" class="tsd-signature-type">IConnectionDataOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_connection_.connection.html" class="tsd-signature-type">Connection</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Connection<span class="tsd-signature-symbol">(</span>protocol<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, portNumber<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, encrypt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_connection_.connection.html" class="tsd-signature-type">Connection</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in connection.ts:40</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L51">connection.ts:51</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an instance of Connection.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Connection</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/_interfaces_.iconnectiondataoptions.html" class="tsd-signature-type">IConnectionDataOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_connection_.connection.html" class="tsd-signature-type">Connection</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L58">connection.ts:58</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -159,7 +189,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>portNumber: <span class="tsd-signature-type">number</span></h5>
+									<h5>portNumber: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The port number of the node</p>
@@ -178,54 +208,50 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="address" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> address</h3>
-					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in connection.ts:30</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="encrypttx" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> encrypt<wbr>Tx</h3>
-					<div class="tsd-signature tsd-kind-icon">encrypt<wbr>Tx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in connection.ts:33</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="httpoptions" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> http<wbr>Options</h3>
 					<div class="tsd-signature tsd-kind-icon">http<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_.ihttpoptions.html" class="tsd-signature-type">IHttpOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in connection.ts:35</li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L51">connection.ts:51</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Holds HTTP connection options</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{IHttpOptions}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Connection</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="port" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> port</h3>
-					<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="options" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> options</h3>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_.iconnectiondataoptions.html" class="tsd-signature-type">IConnectionDataOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in connection.ts:31</li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L42">connection.ts:42</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="protocol" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> protocol</h3>
-					<div class="tsd-signature tsd-kind-icon">protocol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in connection.ts:29</li>
-						</ul>
-					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Holds options provided in the constructor</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{IConnectionDataOptions}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Connection</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -240,7 +266,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in connection.ts:140</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L151">connection.ts:151</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -277,7 +303,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in connection.ts:164</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L170">connection.ts:170</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,7 +331,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in connection.ts:116</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L130">connection.ts:130</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -342,7 +368,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in connection.ts:77</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/connection.ts#L107">connection.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -370,39 +396,6 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Object literals</h2>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
-					<a name="encryptedheaders" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> encrypted<wbr>Headers</h3>
-					<div class="tsd-signature tsd-kind-icon">encrypted<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in connection.ts:37</li>
-						</ul>
-					</aside>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="encryptedheaders.content_type" class="tsd-anchor"></a>
-						<h3>Content-<wbr><wbr>Type</h3>
-						<div class="tsd-signature tsd-kind-icon">Content-<wbr><wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;application/json&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in connection.ts:38</li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="encryptedheaders.x_activeledger_encrypt" class="tsd-anchor"></a>
-						<h3>X-<wbr><wbr>Activeledger-<wbr><wbr>Encrypt</h3>
-						<div class="tsd-signature tsd-kind-icon">X-<wbr><wbr>Activeledger-<wbr><wbr>Encrypt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;1&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in connection.ts:39</li>
-							</ul>
-						</aside>
-					</section>
-				</section>
-			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
@@ -415,6 +408,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_enums_.html">"enums"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_events_.html">"events"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">"index"</a>
@@ -441,19 +437,10 @@
 								<a href="_connection_.connection.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_connection_.connection.html#address" class="tsd-kind-icon">address</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_connection_.connection.html#encrypttx" class="tsd-kind-icon">encrypt<wbr>Tx</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_connection_.connection.html#httpoptions" class="tsd-kind-icon">http<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_connection_.connection.html#port" class="tsd-kind-icon">port</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_connection_.connection.html#protocol" class="tsd-kind-icon">protocol</a>
+								<a href="_connection_.connection.html#options" class="tsd-kind-icon">options</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_connection_.connection.html#encrypt" class="tsd-kind-icon">encrypt</a>
@@ -466,9 +453,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_connection_.connection.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
-								<a href="_connection_.connection.html#encryptedheaders" class="tsd-kind-icon">encrypted<wbr>Headers</a>
 							</li>
 						</ul>
 					</li>
@@ -491,6 +475,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -539,7 +524,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

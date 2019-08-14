@@ -22,7 +22,7 @@
  */
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
-import Axios, { AxiosResponse } from "axios";
+import Axios, { AxiosRequestConfig } from "axios";
 import { IBaseTransaction, IConnectionDataOptions, IHttpOptions, ILedgerResponse, INodeKeyData } from "./interfaces";
 
 /**
@@ -111,13 +111,8 @@ export class Connection {
         const transactionData = this.options.encrypt ? await this.encrypt(txBody) : txBody;
 
         // Post the transaction data
-        this.postTransaction(transactionData)
-          .then((resp: ILedgerResponse) => {
-            resolve(resp);
-          })
-          .catch((err: any) => {
-            reject(err);
-          });
+        const response = await this.postTransaction(transactionData);
+        resolve(response);
       } catch (error) {
         reject(error);
       }
@@ -133,16 +128,15 @@ export class Connection {
    * @memberof Connection
    */
   private postTransaction(tx: string | IBaseTransaction): Promise<ILedgerResponse> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       this.httpOptions.data = tx;
 
-      Axios(this.httpOptions)
-        .then((resp: AxiosResponse) => {
-          resolve(resp.data as ILedgerResponse);
-        })
-        .catch((error: Error) => {
-          reject(error);
-        });
+      try {
+        const response = await Axios(this.httpOptions as AxiosRequestConfig);
+        resolve(response.data as ILedgerResponse);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 
@@ -155,19 +149,14 @@ export class Connection {
    * @memberof Connection
    */
   private encrypt(txBody: IBaseTransaction): Promise<string> {
-    return new Promise((resolve, reject) => {
-      this.getNodeKeyData()
-        .then((keyData: INodeKeyData) => {
-          try {
-            const keyPair = new ActiveCrypto.KeyPair("rsa", keyData.pem);
-            resolve(keyPair.encrypt(txBody));
-          } catch (error) {
-            reject(error);
-          }
-        })
-        .catch((error: Error) => {
-          reject(error);
-        });
+    return new Promise(async (resolve, reject) => {
+      try {
+        const keyData: INodeKeyData = await this.getNodeKeyData();
+        const keyPair = new ActiveCrypto.KeyPair("rsa", keyData.pem);
+        resolve(keyPair.encrypt(txBody));
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 
@@ -179,23 +168,21 @@ export class Connection {
    * @memberof Connection
    */
   private getNodeKeyData(): Promise<INodeKeyData> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const url = `${this.options.protocol}://${this.options.address}:${this.options.portNumber}/a/status`;
 
-      Axios.get(url)
-        .then((resp: AxiosResponse) => {
-          const jsonData = resp.data;
+      try {
+        const response = await Axios.get(url);
+        const jsonData = response.data;
 
-          const nodeKey: INodeKeyData = {
-            encryption: "rsa",
-            pem: Buffer.from(jsonData.pem, "base64").toString(),
-          };
-
-          resolve(nodeKey);
-        })
-        .catch((error: Error) => {
-          reject(error);
-        });
+        const nodeKey: INodeKeyData = {
+          encryption: "rsa",
+          pem: Buffer.from(jsonData.pem, "base64").toString(),
+        };
+        resolve(nodeKey);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }
