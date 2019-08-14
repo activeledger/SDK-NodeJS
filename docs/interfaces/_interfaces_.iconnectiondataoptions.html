@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IKey | @activeledger/sdk</title>
+	<title>IConnectionDataOptions | @activeledger/sdk</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_interfaces_.ikey.html">IKey</a>
+					<a href="_interfaces_.iconnectiondataoptions.html">IConnectionDataOptions</a>
 				</li>
 			</ul>
-			<h1>Interface IKey</h1>
+			<h1>Interface IConnectionDataOptions</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IKey</span>
+						<span class="target">IConnectionDataOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -84,10 +84,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#identity" class="tsd-kind-icon">identity</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iconnectiondataoptions.html#address" class="tsd-kind-icon">address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iconnectiondataoptions.html#encrypt" class="tsd-kind-icon">encrypt</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iconnectiondataoptions.html#portnumber" class="tsd-kind-icon">port<wbr>Number</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.iconnectiondataoptions.html#protocol" class="tsd-kind-icon">protocol</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,42 +96,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="identity" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> identity</h3>
-					<div class="tsd-signature tsd-kind-icon">identity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="address" class="tsd-anchor"></a>
+					<h3>address</h3>
+					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L29">interfaces.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L124">interfaces.ts:124</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">KeyHandler</span></div>
+					<a name="encrypt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> encrypt</h3>
+					<div class="tsd-signature tsd-kind-icon">encrypt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L30">interfaces.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L126">interfaces.ts:126</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="portnumber" class="tsd-anchor"></a>
+					<h3>port<wbr>Number</h3>
+					<div class="tsd-signature tsd-kind-icon">port<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L32">interfaces.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L125">interfaces.ts:125</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="protocol" class="tsd-anchor"></a>
+					<h3>protocol</h3>
+					<div class="tsd-signature tsd-kind-icon">protocol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L31">interfaces.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L123">interfaces.ts:123</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -171,9 +171,27 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.ibasetransaction.html" class="tsd-kind-icon">IBase<wbr>Transaction</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.iconnectiondataoptions.html" class="tsd-kind-icon">IConnection<wbr>Data<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.iconnectiondataoptions.html#address" class="tsd-kind-icon">address</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.iconnectiondataoptions.html#encrypt" class="tsd-kind-icon">encrypt</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.iconnectiondataoptions.html#portnumber" class="tsd-kind-icon">port<wbr>Number</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.iconnectiondataoptions.html#protocol" class="tsd-kind-icon">protocol</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.ieventconfig.html" class="tsd-kind-icon">IEvent<wbr>Config</a>
 					</li>
@@ -183,27 +201,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.ihttpoptions.html" class="tsd-kind-icon">IHttp<wbr>Options</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.ikey.html" class="tsd-kind-icon">IKey</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#identity" class="tsd-kind-icon">identity</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#key" class="tsd-kind-icon">key</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#type" class="tsd-kind-icon">type</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.ikeyexportoptions.html" class="tsd-kind-icon">IKey<wbr>Export<wbr>Options</a>
 					</li>

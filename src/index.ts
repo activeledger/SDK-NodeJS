@@ -26,3 +26,4 @@ export * from "./enums";
 export * from "./interfaces";
 export * from "./key";
 export * from "./transaction";
+export * from "./events";

@@ -69,6 +69,20 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Handles building, signing, and sending of transactions</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>TransactionHandler</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -92,8 +106,9 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_transaction_.transactionhandler.html#buildonboardkeytx" class="tsd-kind-icon">build<wbr>Onboard<wbr>Key<wbr>Tx</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_transaction_.transactionhandler.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_transaction_.transactionhandler.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_transaction_.transactionhandler.html#labelledtransaction" class="tsd-kind-icon">labelled<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_transaction_.transactionhandler.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_transaction_.transactionhandler.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,9 +122,19 @@
 					<div class="tsd-signature tsd-kind-icon">contract<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;onboard&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in transaction.ts:29</li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L49">transaction.ts:49</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The contract name</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>memberof</dt>
+							<dd><p>TransactionHandler</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="namespace" class="tsd-anchor"></a>
@@ -117,9 +142,19 @@
 					<div class="tsd-signature tsd-kind-icon">namespace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;default&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in transaction.ts:30</li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L57">transaction.ts:57</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The namespace the contract is stored in</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>memberof</dt>
+							<dd><p>TransactionHandler</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -128,13 +163,13 @@
 					<a name="buildonboardkeytx" class="tsd-anchor"></a>
 					<h3>build<wbr>Onboard<wbr>Key<wbr>Tx</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">build<wbr>Onboard<wbr>Key<wbr>Tx<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a>, contract<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ionboardtx.html" class="tsd-signature-type">IOnboardTx</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">build<wbr>Onboard<wbr>Key<wbr>Tx<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_interfaces_.ionboardkeytxoptions.html" class="tsd-signature-type">IOnboardKeyTxOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ionboardtx.html" class="tsd-signature-type">IOnboardTx</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in transaction.ts:42</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L69">transaction.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -157,10 +192,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> contract: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> namespace: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_interfaces_.ionboardkeytxoptions.html" class="tsd-signature-type">IOnboardKeyTxOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ionboardtx.html" class="tsd-signature-type">IOnboardTx</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -169,16 +201,95 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="sendtransaction" class="tsd-anchor"></a>
-					<h3>send<wbr>Transaction</h3>
+					<a name="labelledtransaction" class="tsd-anchor"></a>
+					<h3>labelled<wbr>Transaction</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">send<wbr>Transaction<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_interfaces_.ionboardtx.html" class="tsd-signature-type">IOnboardTx</a>, connection<span class="tsd-signature-symbol">: </span><a href="_connection_.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.iledgerresponse.html" class="tsd-signature-type">ILedgerResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">labelled<wbr>Transaction<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ilabelledtransactionoptions.html" class="tsd-signature-type">ILabelledTransactionOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">labelled<wbr>Transaction<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a>, namespace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, contract<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, inputLabel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, inputData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">__type</span>, stream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entry<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, outputs<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span>, readonly<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span>, selfsign<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ilabelledtransaction.html" class="tsd-signature-type">ILabelledTransaction</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in transaction.ts:113</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L109">transaction.ts:109</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>TransactionHandler</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/_interfaces_.ilabelledtransactionoptions.html" class="tsd-signature-type">ILabelledTransactionOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L125">transaction.ts:125</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>TransactionHandler</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a></h5>
+								</li>
+								<li>
+									<h5>namespace: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>contract: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>inputLabel: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>inputData: <span class="tsd-signature-type">__type</span></h5>
+								</li>
+								<li>
+									<h5>stream: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> entry: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> outputs: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> readonly: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> selfsign: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ilabelledtransaction.html" class="tsd-signature-type">ILabelledTransaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="sendtransaction" class="tsd-anchor"></a>
+					<h3>send<wbr>Transaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Transaction&lt;T&gt;<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, connection<span class="tsd-signature-symbol">: </span><a href="_connection_.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.iledgerresponse.html" class="tsd-signature-type">ILedgerResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L247">transaction.ts:247</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -191,10 +302,16 @@
 									</dd>
 								</dl>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a></h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>tx: <a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_interfaces_.ionboardtx.html" class="tsd-signature-type">IOnboardTx</a></h5>
+									<h5>tx: <span class="tsd-signature-type">T</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The transaction to send</p>
 									</div>
@@ -211,17 +328,18 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 					<a name="signtransaction" class="tsd-anchor"></a>
 					<h3>sign<wbr>Transaction</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">sign<wbr>Transaction<span class="tsd-signature-symbol">(</span>txBody<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a>, key<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">sign<wbr>Transaction<span class="tsd-signature-symbol">(</span>txBody<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">sign<wbr>Transaction&lt;T&gt;<span class="tsd-signature-symbol">(</span>txBody<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, key<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in transaction.ts:85</li>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L212">transaction.ts:212</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -229,6 +347,9 @@
 									<p>Sign the provided transaction and add it to the body</p>
 								</div>
 								<dl class="tsd-comment-tags">
+									<dt>template</dt>
+									<dd><p>T extends IBaseTransaction</p>
+									</dd>
 									<dt>memberof</dt>
 									<dd><p>TransactionHandler</p>
 									</dd>
@@ -237,7 +358,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>txBody: <a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a></h5>
+									<h5>txBody: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The transaction to sign</p>
 									</div>
@@ -249,8 +370,31 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>Returns the transaction with its signature</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns the transaction with its signature, or if a string txBody is provided the signature is returned</p>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/transaction.ts#L213">transaction.ts:213</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>txBody: <span class="tsd-signature-type">T</span></h5>
+								</li>
+								<li>
+									<h5>key: <a href="../interfaces/_interfaces_.ikey.html" class="tsd-signature-type">IKey</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -267,6 +411,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_enums_.html">"enums"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_events_.html">"events"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">"index"</a>
@@ -299,9 +446,12 @@
 								<a href="_transaction_.transactionhandler.html#buildonboardkeytx" class="tsd-kind-icon">build<wbr>Onboard<wbr>Key<wbr>Tx</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_transaction_.transactionhandler.html#labelledtransaction" class="tsd-kind-icon">labelled<wbr>Transaction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="_transaction_.transactionhandler.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="_transaction_.transactionhandler.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a>
 							</li>
 						</ul>
@@ -325,6 +475,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -373,7 +524,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

@@ -61,21 +61,17 @@ export class KeyHandler {
    * @memberof KeyHandler
    */
   public onboardKey(key: IKey, connection: Connection): Promise<ILedgerResponse> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const txHandler = new TransactionHandler();
 
-      txHandler
-        .buildOnboardKeyTx(key)
-        .then((txBody: IOnboardTx) => {
-          return txHandler.sendTransaction(txBody, connection);
-        })
-        .then((response: ILedgerResponse) => {
-          key.identity = response.$streams.new[0].id;
-          resolve(response);
-        })
-        .catch((error: Error) => {
-          reject(error);
-        });
+      try {
+        const txBody = await txHandler.buildOnboardKeyTx(key);
+        const response = await txHandler.sendTransaction(txBody, connection);
+        key.identity = response.$streams.new[0].id;
+        resolve(response);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

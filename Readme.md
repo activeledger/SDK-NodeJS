@@ -17,9 +17,6 @@ This SDK can be used in JavaScript and TypeScript projects.
 
 ```
 $ npm i -s @activeledger/sdk
-
-
-
 ```
 
 ## Usage
@@ -31,6 +28,7 @@ The SDK currently supports the following functionality
 - Key onboarding
 - Transaction building
 - Encrypted & unencrypted transaction posting
+- SSE Subscriptions
 
 Once the SDK has been installed import the classes and interfaces as you need them.
 
@@ -268,6 +266,89 @@ txHandler
     // Do something with the response
   })
   .catch();
+```
+
+---
+
+### Events
+
+The event class of the SDK provides the caller with easy access to the server side events provided by ActiveCore.
+
+#### Example usage
+
+##### Initialise
+
+```typescript
+import { LedgerEvents } from "@activeledger/sdk";
+
+const events = new LedgerEvents("{ActiveCore URL}");
+```
+
+##### Subscribe to all Activities
+
+```typescript
+const reference = events.subscribeToActivity(eventData => {
+  // Do something with event data
+});
+```
+
+##### Subscribe to a specific Activity
+
+```typescript
+const reference = events.subscribeToActivity("{activityStream}", eventData => {
+  // Do something with event data
+});
+```
+
+##### Subscribe to all events
+
+```typescript
+const reference = events.subscribeToEvent(eventData => {
+  // Do something with event data
+});
+```
+
+##### Subscribe to all events of a specific contract
+
+```typescript
+const config: IEventConfig {
+  contract: "{contractId}"
+};
+
+const reference = events.subscribeToEvent(eventData => {
+    // Do something with event data
+  },
+  config
+);
+```
+
+##### Subscribe to a specific event of a specific contract
+
+```typescript
+const config: IEventConfig {
+  contract: "{contractId}",
+  event: "{contractId}"
+};
+
+const reference = events.subscribeToEvent(eventData => {
+    // Do something with event data
+  },
+  config
+);
+```
+
+##### Unsubscribe from an event
+
+This is the same for both Activity events and Events
+
+```typescript
+// Create a subscription and store the returned reference number
+const reference = events.subscribeToActivity(eventData => {
+  // Do something with event data
+});
+
+// Unsubscribe
+events.unsubscribe(reference);
 ```
 
 ---

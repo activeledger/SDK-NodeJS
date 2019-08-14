@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IKey | @activeledger/sdk</title>
+	<title>ILabelledTransaction | @activeledger/sdk</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_interfaces_.ikey.html">IKey</a>
+					<a href="_interfaces_.ilabelledtransaction.html">ILabelledTransaction</a>
 				</li>
 			</ul>
-			<h1>Interface IKey</h1>
+			<h1>Interface ILabelledTransaction</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IKey</span>
+						<a href="_interfaces_.ibasetransaction.html" class="tsd-signature-type">IBaseTransaction</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ILabelledTransaction</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,10 +89,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#identity" class="tsd-kind-icon">identity</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ikey.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_interfaces_.ilabelledtransaction.html#_selfsign" class="tsd-kind-icon">$selfsign</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_interfaces_.ilabelledtransaction.html#_sigs" class="tsd-kind-icon">$sigs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="_interfaces_.ilabelledtransaction.html#_tx" class="tsd-kind-icon">$tx</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,43 +99,36 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="identity" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> identity</h3>
-					<div class="tsd-signature tsd-kind-icon">identity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_selfsign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> $selfsign</h3>
+					<div class="tsd-signature tsd-kind-icon">$selfsign<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_interfaces_.ibasetransaction.html">IBaseTransaction</a>.<a href="_interfaces_.ibasetransaction.html#_selfsign">$selfsign</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L29">interfaces.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L86">interfaces.ts:86</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">KeyHandler</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_sigs" class="tsd-anchor"></a>
+					<h3>$sigs</h3>
+					<div class="tsd-signature tsd-kind-icon">$sigs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_interfaces_.ibasetransaction.html">IBaseTransaction</a>.<a href="_interfaces_.ibasetransaction.html#_sigs">$sigs</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L30">interfaces.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L87">interfaces.ts:87</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+					<a name="_tx" class="tsd-anchor"></a>
+					<h3>$tx</h3>
+					<div class="tsd-signature tsd-kind-icon">$tx<span class="tsd-signature-symbol">:</span> <a href="_interfaces_.ilabelledtransactionbody.html" class="tsd-signature-type">ILabelledTransactionBody</a></div>
 					<aside class="tsd-sources">
+						<p>Overrides <a href="_interfaces_.ibasetransaction.html">IBaseTransaction</a>.<a href="_interfaces_.ibasetransaction.html#_tx">$tx</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L32">interfaces.ts:32</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L31">interfaces.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/activeledger/SDK-NodeJS/blob/4891523/src/interfaces.ts#L58">interfaces.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -183,33 +180,30 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_interfaces_.ihttpoptions.html" class="tsd-kind-icon">IHttp<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_interfaces_.ikey.html" class="tsd-kind-icon">IKey</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_interfaces_.ikeyexportoptions.html" class="tsd-kind-icon">IKey<wbr>Export<wbr>Options</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_interfaces_.ikey.html" class="tsd-kind-icon">IKey</a>
+						<a href="_interfaces_.ilabelledtransaction.html" class="tsd-kind-icon">ILabelled<wbr>Transaction</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#identity" class="tsd-kind-icon">identity</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_interfaces_.ilabelledtransaction.html#_selfsign" class="tsd-kind-icon">$selfsign</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#key" class="tsd-kind-icon">key</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_interfaces_.ilabelledtransaction.html#_sigs" class="tsd-kind-icon">$sigs</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_.ikey.html#type" class="tsd-kind-icon">type</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+								<a href="_interfaces_.ilabelledtransaction.html#_tx" class="tsd-kind-icon">$tx</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_interfaces_.ikeyexportoptions.html" class="tsd-kind-icon">IKey<wbr>Export<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_interfaces_.ilabelledtransaction.html" class="tsd-kind-icon">ILabelled<wbr>Transaction</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_interfaces_.ilabelledtransactionbody.html" class="tsd-kind-icon">ILabelled<wbr>Transaction<wbr>Body</a>
 					</li>

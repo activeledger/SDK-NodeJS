@@ -65,15 +65,26 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<img src="https://www.activeledger.io/wp-content/uploads/2018/09/Asset-23.png" alt="Activeledger" width="500"/>
-				<h1 id="activeledger-node-sdk">Activeledger - Node SDK</h1>
+				<a href="#activeledger---node-sdk" id="activeledger---node-sdk" style="color: inherit; text-decoration: none;">
+					<h1>Activeledger - Node SDK</h1>
+				</a>
 				<p>The Activeledger Node SDK has been built to provide an easy way to connect your Node based application with an Activeledger network.
 				This SDK can be used in JavaScript and TypeScript projects.</p>
-				<h3 id="github">GitHub</h3>
+				<a href="#github" id="github" style="color: inherit; text-decoration: none;">
+					<h3>GitHub</h3>
+				</a>
 				<p><a href="https://github.com/activeledger/SDK-NodeJS/">Repository here</a></p>
-				<h3 id="further-documentation">Further Documentation</h3>
+				<a href="#further-documentation" id="further-documentation" style="color: inherit; text-decoration: none;">
+					<h3>Further Documentation</h3>
+				</a>
 				<p><a href="https://activeledger.github.io/SDK-NodeJS/">Documentation here</a></p>
-				<h2 id="installation">Installation</h2>
-				<pre><code>$ <span class="hljs-built_in">npm</span> i -s @activeledger/sdk</code></pre><h2 id="usage">Usage</h2>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code>$ <span class="hljs-built_in">npm</span> i -s @activeledger/sdk</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
 				<p>The SDK currently supports the following functionality</p>
 				<ul>
 					<li>Connection handling</li>
@@ -81,11 +92,14 @@
 					<li>Key onboarding</li>
 					<li>Transaction building</li>
 					<li>Encrypted &amp; unencrypted transaction posting</li>
+					<li>SSE Subscriptions</li>
 				</ul>
 				<p>Once the SDK has been installed import the classes and interfaces as you need them.</p>
 				<pre><code class="language-typescript"><span class="hljs-comment">// Example</span>
 <span class="hljs-keyword">import</span> { Connection } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;</code></pre>
-				<h3 id="enums">Enums</h3>
+				<a href="#enums" id="enums" style="color: inherit; text-decoration: none;">
+					<h3>Enums</h3>
+				</a>
 				<p>The Activeledger Node SDK provides an enum to help handle key types.</p>
 				<table>
 					<thead>
@@ -103,7 +117,9 @@
 							<td>KeyType.RSA</td>
 						</tr>
 				</tbody></table>
-				<h3 id="interfaces">Interfaces</h3>
+				<a href="#interfaces" id="interfaces" style="color: inherit; text-decoration: none;">
+					<h3>Interfaces</h3>
+				</a>
 				<p>The Activeledger Node SDK provides multiple interfaces to provide you with.</p>
 				<table>
 					<thead>
@@ -161,10 +177,14 @@
 							<td>Used by IBaseTransaction for the $tx variable</td>
 						</tr>
 				</tbody></table>
-				<h3 id="connection">Connection</h3>
+				<a href="#connection" id="connection" style="color: inherit; text-decoration: none;">
+					<h3>Connection</h3>
+				</a>
 				<p>When sending a transaction, you must pass a connection that provides the information needed to establish a link to the network and specified node.</p>
 				<p>To do this a connection object must be created. This object must be passed the protocol, address, port, and optionally the encryption flag.</p>
-				<h4 id="example">Example</h4>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h4>Example</h4>
+				</a>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Connection } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 <span class="hljs-comment">// Setup the connection object to use localhost over http unencrypted</span>
 <span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(<span class="hljs-string">"http"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">5260</span>);
@@ -172,58 +192,62 @@
 <span class="hljs-comment">// Use localhost but encrypt transactions</span>
 <span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(<span class="hljs-string">"http"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">5260</span>, <span class="hljs-literal">true</span>);</code></pre>
 				<hr>
-				<h3 id="keyhandler">KeyHandler</h3>
+				<a href="#keyhandler" id="keyhandler" style="color: inherit; text-decoration: none;">
+					<h3>KeyHandler</h3>
+				</a>
 				<p>Note: Generating an RSA key is resource intensive and can take a few seconds.</p>
 				<p>The Key Handler can be used to generate and onboard a key.</p>
 				<p>The Key generation function and key onboard function are setup to be used separately as you may not want to immediately onboard a key. Additionally, you will need to store the key as it is used to sign all transactions involving the identity created when you onboard it.</p>
 				<p>There are two key types that can be generated currently, more are planned and will be implemented into Activeledger first. These types are RSA and Elliptic Curve.</p>
-				<h4 id="generating-a-key">Generating a key</h4>
+				<a href="#generating-a-key" id="generating-a-key" style="color: inherit; text-decoration: none;">
+					<h4>Generating a key</h4>
+				</a>
 				<p>When generating a key you must pass it a name and the key type.</p>
-				<h5 id="example">Example</h5>
+				<a href="#example-1" id="example-1" style="color: inherit; text-decoration: none;">
+					<h5>Example</h5>
+				</a>
 				<p>Note: This example uses the IKey interface which provides the structure of the key</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
-  KeyHandler,
-  IKey,
-  KeyType
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { KeyHandler, IKey, KeyType } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
 <span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
 
 <span class="hljs-keyword">let</span> key: IKey;
 
 <span class="hljs-comment">// Generate RSA Key</span>
-keyHandler.generateKey(<span class="hljs-string">"keyname"</span>, KeyType.RSA)
-.then(<span class="hljs-function">(<span class="hljs-params">generatedKey: IKey</span>) =&gt;</span> {
-  key = generatedKey;
-})
-.catch();
+keyHandler
+  .generateKey(<span class="hljs-string">"keyname"</span>, KeyType.RSA)
+  .then(<span class="hljs-function">(<span class="hljs-params">generatedKey: IKey</span>) =&gt;</span> {
+    key = generatedKey;
+  })
+  .catch();
 <span class="hljs-comment">// or to generate an Elliptic Curve key</span>
 <span class="hljs-comment">// keyHandler.generateKey("keyname", KeyType.EllipticCurve)</span></code></pre>
-				<h4 id="onboarding-a-key">Onboarding a key</h4>
+				<a href="#onboarding-a-key" id="onboarding-a-key" style="color: inherit; text-decoration: none;">
+					<h4>Onboarding a key</h4>
+				</a>
 				<p>Once you have a key generated, to use it to sign transactions it must be onboarded to the ledger network</p>
-				<h5 id="example">Example</h5>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
-  Connection,
-  KeyHandler,
-  IKey,
-  KeyType,
-  ILedgerResponse
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
+				<a href="#example-2" id="example-2" style="color: inherit; text-decoration: none;">
+					<h5>Example</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Connection, KeyHandler, IKey, KeyType, ILedgerResponse } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
 <span class="hljs-keyword">const</span> connection = <span class="hljs-keyword">new</span> Connection(<span class="hljs-string">"http"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">5260</span>);
 <span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
 
 <span class="hljs-keyword">let</span> key: IKey;
-keyHandler.generateKey(<span class="hljs-string">"keyname"</span>, KeyType.EllipticCurve)
-.then(<span class="hljs-function">(<span class="hljs-params">generatedKey: IKey</span>) =&gt;</span> {
-  key = generatedKey;
-  <span class="hljs-keyword">return</span> keyHandler.onboardKey(key, connection);
-})
-.then(<span class="hljs-function">(<span class="hljs-params">ledgerResp: ILedgerResponse</span>) =&gt;</span> {
-  resolve(ledgerResp);
-})
-.catch();</code></pre>
-				<h4 id="exporting-a-key">Exporting a key</h4>
+keyHandler
+  .generateKey(<span class="hljs-string">"keyname"</span>, KeyType.EllipticCurve)
+  .then(<span class="hljs-function">(<span class="hljs-params">generatedKey: IKey</span>) =&gt;</span> {
+    key = generatedKey;
+    <span class="hljs-keyword">return</span> keyHandler.onboardKey(key, connection);
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">ledgerResp: ILedgerResponse</span>) =&gt;</span> {
+    resolve(ledgerResp);
+  })
+  .catch();</code></pre>
+				<a href="#exporting-a-key" id="exporting-a-key" style="color: inherit; text-decoration: none;">
+					<h4>Exporting a key</h4>
+				</a>
 				<p>You can use the SDK to export a key in JSON format to the filesystem. This will be in the same structure as the IKey interface.</p>
 				<p>When exporting a key the required parameters are the Key object and the location to store it.
 				Note that the location should not include the name of the file, this is an optional parameter.</p>
@@ -267,17 +291,20 @@ keyHandler.generateKey(<span class="hljs-string">"keyname"</span>, KeyType.Ellip
 							<td>No</td>
 						</tr>
 				</tbody></table>
-				<h5 id="example">Example</h5>
+				<a href="#example-3" id="example-3" style="color: inherit; text-decoration: none;">
+					<h5>Example</h5>
+				</a>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { KeyHandler } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
 <span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
 
 <span class="hljs-keyword">const</span> key: IKey = <span class="hljs-keyword">await</span> keyHandler.generateKey(<span class="hljs-string">"Key Name"</span>, KeyType.EllipticCurve);
-keyHandler.exportKey(key, <span class="hljs-string">"./"</span>)
-.then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+keyHandler.exportKey(key, <span class="hljs-string">"./"</span>).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   <span class="hljs-comment">// Now export is finished do something</span>
 });</code></pre>
-				<h4 id="importing-a-key">Importing a key</h4>
+				<a href="#importing-a-key" id="importing-a-key" style="color: inherit; text-decoration: none;">
+					<h4>Importing a key</h4>
+				</a>
 				<p>You can also use the SDK to import a key from the file system. Note that this key file must follow the same structure as the IKey interface.</p>
 				<p>The import function requires that the location parameter includes the file name with .json extension.</p>
 				<table>
@@ -296,27 +323,31 @@ keyHandler.exportKey(key, <span class="hljs-string">"./"</span>)
 							<td>Yes</td>
 						</tr>
 				</tbody></table>
-				<h5 id="example">Example</h5>
+				<a href="#example-4" id="example-4" style="color: inherit; text-decoration: none;">
+					<h5>Example</h5>
+				</a>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { KeyHandler } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
 <span class="hljs-keyword">const</span> keyHandler = <span class="hljs-keyword">new</span> KeyHandler();
-keyHandler.importKey(<span class="hljs-string">`./<span class="hljs-subst">${key.name}</span>.json`</span>)
-.then(<span class="hljs-function">(<span class="hljs-params">importedKey: IKey</span>) =&gt;</span> {
+keyHandler.importKey(<span class="hljs-string">`./<span class="hljs-subst">${key.name}</span>.json`</span>).then(<span class="hljs-function">(<span class="hljs-params">importedKey: IKey</span>) =&gt;</span> {
   <span class="hljs-comment">// Do something with the key</span>
-});
-</code></pre>
+});</code></pre>
 				<hr>
-				<h3 id="transactionhandler">TransactionHandler</h3>
+				<a href="#transactionhandler" id="transactionhandler" style="color: inherit; text-decoration: none;">
+					<h3>TransactionHandler</h3>
+				</a>
 				<p>The Transaction Handler is used to sign and send transactions.</p>
 				<p>You can use the IBaseTransaction as a helper when building a transaction to be sent to the ledger.</p>
-				<h4 id="signing-a-transaction">Signing a transaction</h4>
+				<a href="#signing-a-transaction" id="signing-a-transaction" style="color: inherit; text-decoration: none;">
+					<h4>Signing a transaction</h4>
+				</a>
 				<p>When signing a transaction you must send the finished version of it. No changes can be made after signing as this will cause the ledger to reject it.</p>
 				<p>You must pass the transaction and the correct key to this function. The key must be one that has been successfully onboarded to the ledger which the transaction is being sent to.</p>
-				<h5 id="example">Example</h5>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
-  TransactionHandler,
-  IBaseTransaction
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
+				<p>It is also possible to send the transaction to be signed as a string, the signing function will then return just the signature as a string.</p>
+				<a href="#example-5" id="example-5" style="color: inherit; text-decoration: none;">
+					<h5>Example</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { TransactionHandler, IBaseTransaction } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
 <span class="hljs-comment">// Connection and key code goes here if needed</span>
 
@@ -337,33 +368,118 @@ tx.$tx.$i[key.identity] = {
 };
 
 <span class="hljs-comment">// Sign the transaction</span>
-txHandler.signTransaction(tx, key)
-.then(<span class="hljs-function">(<span class="hljs-params">signedTx: IBaseTransaction</span>) =&gt;</span> {
-  tx = signedTx;
-})
-.catch();</code></pre>
-				<h4 id="sending-a-transaction">Sending a transaction</h4>
-				<h5 id="example">Example</h5>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
-  TransactionHandler,
-  IBaseTransaction
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
+txHandler
+  .signTransaction(tx, key)
+  .then(<span class="hljs-function">(<span class="hljs-params">signedTx: IBaseTransaction</span>) =&gt;</span> {
+    tx = signedTx;
+  })
+  .catch();
+
+<span class="hljs-comment">// Sign a string transaction</span>
+txHandler
+  .signTransaction(<span class="hljs-string">"Hello world"</span>, key)
+  .then(<span class="hljs-function">(<span class="hljs-params">signature: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+    <span class="hljs-comment">// Do something with the signature</span>
+  })
+  .catch();</code></pre>
+				<a href="#sending-a-transaction" id="sending-a-transaction" style="color: inherit; text-decoration: none;">
+					<h4>Sending a transaction</h4>
+				</a>
+				<a href="#example-6" id="example-6" style="color: inherit; text-decoration: none;">
+					<h5>Example</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { TransactionHandler, IBaseTransaction } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
 
 <span class="hljs-comment">// Connection setup, Transaction building and signing here</span>
 
 <span class="hljs-comment">// Send the transaction</span>
-txHandler.sendTransaction(tx, connection)
-.then(<span class="hljs-function">(<span class="hljs-params">response: ILedgerResponse</span>) =&gt;</span> {
-  <span class="hljs-comment">// Do something with the response</span>
-})
-.catch();</code></pre>
+txHandler
+  .sendTransaction(tx, connection)
+  .then(<span class="hljs-function">(<span class="hljs-params">response: ILedgerResponse</span>) =&gt;</span> {
+    <span class="hljs-comment">// Do something with the response</span>
+  })
+  .catch();</code></pre>
 				<hr>
-				<h3 id="jsdocs">JSDocs</h3>
-				<p>You can read further documentation <a href="out/index.html">here.</a></p>
-				<h3 id="activeledger">Activeledger</h3>
-				<p><a href="https://activeledger.io/">Visit Activeledger.io</a> </p>
+				<a href="#events" id="events" style="color: inherit; text-decoration: none;">
+					<h3>Events</h3>
+				</a>
+				<p>The event class of the SDK provides the caller with easy access to the server side events provided by ActiveCore.</p>
+				<a href="#example-usage" id="example-usage" style="color: inherit; text-decoration: none;">
+					<h4>Example usage</h4>
+				</a>
+				<a href="#initialise" id="initialise" style="color: inherit; text-decoration: none;">
+					<h5>Initialise</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { LedgerEvents } <span class="hljs-keyword">from</span> <span class="hljs-string">"@activeledger/sdk"</span>;
+
+<span class="hljs-keyword">const</span> events = <span class="hljs-keyword">new</span> LedgerEvents(<span class="hljs-string">"{ActiveCore URL}"</span>);</code></pre>
+				<a href="#subscribe-to-all-activities" id="subscribe-to-all-activities" style="color: inherit; text-decoration: none;">
+					<h5>Subscribe to all Activities</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> reference = events.subscribeToActivity(<span class="hljs-function"><span class="hljs-params">eventData</span> =&gt;</span> {
+  <span class="hljs-comment">// Do something with event data</span>
+});</code></pre>
+				<a href="#subscribe-to-a-specific-activity" id="subscribe-to-a-specific-activity" style="color: inherit; text-decoration: none;">
+					<h5>Subscribe to a specific Activity</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> reference = events.subscribeToActivity(<span class="hljs-string">"{activityStream}"</span>, <span class="hljs-function"><span class="hljs-params">eventData</span> =&gt;</span> {
+  <span class="hljs-comment">// Do something with event data</span>
+});</code></pre>
+				<a href="#subscribe-to-all-events" id="subscribe-to-all-events" style="color: inherit; text-decoration: none;">
+					<h5>Subscribe to all events</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> reference = events.subscribeToEvent(<span class="hljs-function"><span class="hljs-params">eventData</span> =&gt;</span> {
+  <span class="hljs-comment">// Do something with event data</span>
+});</code></pre>
+				<a href="#subscribe-to-all-events-of-a-specific-contract" id="subscribe-to-all-events-of-a-specific-contract" style="color: inherit; text-decoration: none;">
+					<h5>Subscribe to all events of a specific contract</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> config: IEventConfig {
+  contract: <span class="hljs-string">"{contractId}"</span>
+};
+
+<span class="hljs-keyword">const</span> reference = events.subscribeToEvent(<span class="hljs-function"><span class="hljs-params">eventData</span> =&gt;</span> {
+    <span class="hljs-comment">// Do something with event data</span>
+  },
+  config
+);</code></pre>
+				<a href="#subscribe-to-a-specific-event-of-a-specific-contract" id="subscribe-to-a-specific-event-of-a-specific-contract" style="color: inherit; text-decoration: none;">
+					<h5>Subscribe to a specific event of a specific contract</h5>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> config: IEventConfig {
+  contract: <span class="hljs-string">"{contractId}"</span>,
+  event: <span class="hljs-string">"{contractId}"</span>
+};
+
+<span class="hljs-keyword">const</span> reference = events.subscribeToEvent(<span class="hljs-function"><span class="hljs-params">eventData</span> =&gt;</span> {
+    <span class="hljs-comment">// Do something with event data</span>
+  },
+  config
+);</code></pre>
+				<a href="#unsubscribe-from-an-event" id="unsubscribe-from-an-event" style="color: inherit; text-decoration: none;">
+					<h5>Unsubscribe from an event</h5>
+				</a>
+				<p>This is the same for both Activity events and Events</p>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Create a subscription and store the returned reference number</span>
+<span class="hljs-keyword">const</span> reference = events.subscribeToActivity(<span class="hljs-function"><span class="hljs-params">eventData</span> =&gt;</span> {
+  <span class="hljs-comment">// Do something with event data</span>
+});
+
+<span class="hljs-comment">// Unsubscribe</span>
+events.unsubscribe(reference);</code></pre>
+				<hr>
+				<a href="#further-documentation-1" id="further-documentation-1" style="color: inherit; text-decoration: none;">
+					<h3>Further Documentation</h3>
+				</a>
+				<p>You can read further documentation <a href="https://activeledger.github.io/SDK-NodeJS/">here.</a></p>
+				<a href="#activeledger" id="activeledger" style="color: inherit; text-decoration: none;">
+					<h3>Activeledger</h3>
+				</a>
+				<p><a href="https://activeledger.io/">Visit Activeledger.io</a></p>
 				<p><a href="https://github.com/activeledger/activeledger">Read Activeledgers documentation</a></p>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<hr>
 				<p>This project is licensed under the <a href="https://github.com/activeledger/activeledger/blob/master/LICENSE">MIT</a> License</p>
 			</div>
@@ -379,6 +495,9 @@ txHandler.sendTransaction(tx, connection)
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_enums_.html">"enums"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_events_.html">"events"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>
@@ -413,6 +532,7 @@ txHandler.sendTransaction(tx, connection)
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -461,7 +581,7 @@ txHandler.sendTransaction(tx, connection)
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
