@@ -203,7 +203,7 @@ export class KeyHandler {
               }
             });
           } else {
-            reject("File already exists, set overwrite to true or use a different name");
+            reject("File not found.");
           }
         });
       } else {

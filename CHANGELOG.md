@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [Unreleased]
 
+## [1.3.1] - 12-09-2019
+
+### Changed
+
+- Updated some packages
+- Corrected labelled transaction test
+
+### Fixed
+
+- Import reject message if file not found was the same as the export error message when a file cannot be written
+- Activedefintions error if not installed, moved to dependencies until solution is found
+
+## [1.3.0] - 09-09-2019
+
+### Added
+
+- Server sent event handling
+
 ## [1.2.5] - 22-05-2019
 
 ### Added

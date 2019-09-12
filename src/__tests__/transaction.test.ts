@@ -70,6 +70,7 @@ test("Create a labelled transaction", async () => {
       inputLabel: "Test input label",
       key,
       namespace: "default",
+      stream: key.identity,
     };
 
     const signedTx = await txHandler.labelledTransaction(labelOptions);
