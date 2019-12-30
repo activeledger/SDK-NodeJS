@@ -27,7 +27,7 @@ export class LedgerEvents {
    * @private
    * @memberof LedgerEvents
    */
-  private reference = 0;
+  private reference = 1;
 
   /**
    * Creates an instance of LedgerEvents.
@@ -90,7 +90,7 @@ export class LedgerEvents {
 
     eventSource.onerror = (error: MessageEvent) => {
       this.errorEvents.emit("ledgerEventError", error);
-      this.unsubscribe(internalReference);
+      //this.unsubscribe(internalReference);
     };
 
     eventSource.addEventListener("message", (event: any) => {
@@ -135,7 +135,7 @@ export class LedgerEvents {
 
     eventSource.onerror = (error: MessageEvent) => {
       this.errorEvents.emit("ledgerEventError", error);
-      this.unsubscribe(internalReference);
+      //this.unsubscribe(internalReference);
     };
 
     eventSource.addEventListener("message", (event: any) => {
@@ -160,10 +160,10 @@ export class LedgerEvents {
     try {
       // Remove the listener from the listeners array
       const eventSource = this.listeners[id];
-      delete this.listeners[id];
       // Close the event connection
       eventSource.close();
-
+      // Delete Reference
+      delete this.listeners[id];
       return true;
     } catch (error) {
       return false;
