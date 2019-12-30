@@ -1,6 +1,6 @@
 // @ts-ignore
 import { EventEmitter } from "events";
-import EventSource = require("eventsource");
+import EventSourceN = require("eventsource");
 import { IEventConfig, IEventListeners } from "./interfaces";
 
 /**
@@ -11,6 +11,7 @@ import { IEventConfig, IEventListeners } from "./interfaces";
  */
 export class LedgerEvents {
   public errorEvents: EventEmitter;
+  private isBrowser: boolean = require("browser-or-node").isBrowser;
 
   /**
    * Holds referenced listeners
@@ -86,7 +87,7 @@ export class LedgerEvents {
     // Build the resource part of the URL
     const resource = streamId ? `activity/subscribe/${streamId}` : "activity/subscribe";
 
-    const eventSource = new EventSource(`${this.url}/${resource}`);
+    const eventSource = this.getEventSourceProvider(`${this.url}/${resource}`);
 
     eventSource.onerror = (error: MessageEvent) => {
       this.errorEvents.emit("ledgerEventError", error);
@@ -131,7 +132,7 @@ export class LedgerEvents {
       if (config.event) resource += `/${config.event}`;
     }
 
-    const eventSource = new EventSource(`${this.url}/${resource}`);
+    const eventSource = this.getEventSourceProvider(`${this.url}/${resource}`);
 
     eventSource.onerror = (error: MessageEvent) => {
       this.errorEvents.emit("ledgerEventError", error);
@@ -160,7 +161,7 @@ export class LedgerEvents {
     try {
       // Remove the listener from the listeners array
       const eventSource = this.listeners[id];
-      // Close the event connection
+      // Close the event connection`
       eventSource.close();
       // Delete Reference
       delete this.listeners[id];
@@ -168,5 +169,20 @@ export class LedgerEvents {
     } catch (error) {
       return false;
     }
+  }
+
+  /**
+   * Detect EventSource Provider
+   *
+   * @private
+   * @param {string} url
+   * @returns {(EventSource | EventSourceN)}
+   * @memberof LedgerEvents
+   */
+  private getEventSourceProvider(url: string): EventSource | EventSourceN {
+    if(this.isBrowser && EventSource) {
+      return new EventSource(url);
+    }
+    return new EventSourceN(url);
   }
 }

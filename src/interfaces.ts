@@ -22,7 +22,7 @@
  */
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
-import EventSource = require("eventsource");
+import EventSourceN = require("eventsource");
 
 // #region Key Interfaces
 
@@ -165,6 +165,6 @@ export interface IEventConfig {
 }
 
 export interface IEventListeners {
-  [id: number]: EventSource;
+  [id: number]: EventSource | EventSourceN;
 }
 // #endregion
