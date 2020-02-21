@@ -1,3 +1,6 @@
+// Reference Fix (Node SDK Builds)
+/// <reference lib="dom" />
+
 /*
  * MIT License (MIT)
  * Copyright (c) 2019 Activeledger
@@ -20,7 +23,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { ActiveCrypto } from "@activeledger/activecrypto";
 import EventSourceN = require("eventsource");
 

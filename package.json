@@ -1,6 +1,6 @@
 {
   "name": "@activeledger/sdk",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "NodeJS package for use when integrating with Activeledger",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
