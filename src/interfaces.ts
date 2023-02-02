@@ -136,6 +136,8 @@ export interface ILedgerResponse {
   $umid: string;
   $summary: ISummaryObject;
   $streams: IStreamsObject;
+  $responses?: unknown[];
+  $debug?: IBaseTransaction;
 }
 
 interface ISummaryObject {
