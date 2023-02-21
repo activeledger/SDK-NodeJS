@@ -22,7 +22,7 @@
  */
 
 import { ActiveCrypto } from "@activeledger/activecrypto";
-import Axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { IBaseTransaction, IConnectionDataOptions, IHttpOptions, ILedgerResponse, INodeKeyData } from "./interfaces";
 
 /**
@@ -132,7 +132,7 @@ export class Connection {
       this.httpOptions.data = tx;
 
       try {
-        const response = await Axios(this.httpOptions as AxiosRequestConfig);
+        const response = await axios(this.httpOptions as AxiosRequestConfig);
         resolve(response.data as ILedgerResponse);
       } catch (error) {
         reject(error);
@@ -172,7 +172,7 @@ export class Connection {
       const url = `${this.options.protocol}://${this.options.address}:${this.options.portNumber}/a/status`;
 
       try {
-        const response = await Axios.get(url);
+        const response = await axios.get(url);
         const jsonData = response.data;
 
         const nodeKey: INodeKeyData = {
